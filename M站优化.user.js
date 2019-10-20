@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         M站优化
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  优化bimibimi，去广告，允许选中和右键、还原鼠标样式
 // @author       HaoNShi
 // @match        http://www.bimibimi.tv/*
@@ -12,7 +12,7 @@
     'use strict';
 
     // 去广告
-    //$("#close").remove();
+    // $("#close").remove();
     $(document).ready(function() {
         $("div[style]").each(function() {
             if ($(this).css("z-index") == "2147483647") {
@@ -20,6 +20,8 @@
             }
         })
     });
+
+    $("div[class='tuiguang']").remove();
 
     // 允许选中和右键
     document.oncontextmenu=function(e){return true;};
