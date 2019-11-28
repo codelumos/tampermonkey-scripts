@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         M站优化
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @description  优化bimibimi，去广告，允许选中和右键，还原鼠标样式等
 // @author       HaoNShi
-// @match        http://www.bimibimi.tv/*
+// @match        *://www.bimibimi.tv/*
 // @grant        none
 // ==/UserScript==
 
@@ -16,6 +16,8 @@
     $(document).ready(function() {
         $("div[style]").each(function() {
             if ($(this).css("z-index") == "2147483647") {
+                $(this).remove();
+            } else if ($(this).css("z-index") == "2147483") {
                 $(this).remove();
             }
         })
