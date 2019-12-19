@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         360导航去广告
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  删除360导航部分广告
 // @author       HaoNShi
 // @match        *://hao.360.com/*
@@ -18,6 +18,7 @@
     setInterval(function(){
         $("#top-full-column-tips").remove(); // 顶部广告
         $("#doc").css("top", "0"); // 去除顶部广告后上移body
+        $("li[notice-ad = 'true']").remove(); // 消息广告
 
         $("#activity").remove(); // 左侧广告
         $(".textlink_ad_icon").parent().remove(); // 热点广告条目
@@ -30,6 +31,8 @@
         $(".mv").remove(); // 游戏攻略广告
         $(".clearfix.feed-mv.js-mv-infoflow-item").remove(); // 娱乐沸点广告
         $(".feed-item.feed-mv.js-mv-infoflow-item").remove(); // 推荐广告
+        $(".gouwu-left").remove(); // 购物广告
+        $(".licai-right").remove(); // 金融广告
 
         $(".plane-hd.plane-adsvc").remove(); // 右侧导航栏广告
         $("#festival_float_bottom").remove(); // 底部横幅广告
