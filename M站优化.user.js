@@ -1,7 +1,8 @@
 // ==UserScript==
 // @name         M站优化
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
+// @icon         http://www.bimibimi.tv/favicon.ico
 // @description  优化bimibimi：去广告，允许选中和右键，还原鼠标样式等
 // @author       HaoNShi
 // @match        *://www.bimibimi.tv/*
@@ -36,8 +37,6 @@
     })
 
     // 调整播放页的导航栏和关灯按钮的层级
-    $("ul").each(function() {
-        $(this).css("z-index", "999");
-    })
+    $(".wrapper > ul > li > ul").css("z-index", "999");
 
 })();
