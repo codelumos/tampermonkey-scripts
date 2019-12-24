@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    http://tampermonkey.net/
-// @version      0.4
+// @version      0.5
 // @icon         http://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片去广告
 // @author       HaoNShi
@@ -52,6 +52,9 @@
         $(".grid-r.qb-side").remove();
         $(".wgt-ads").remove();
         $(".wgt-bottom-union").remove();
+        setTimeout(function(){
+            $(".ec-pc_mat_coeus__related_link_text-content").remove();
+        }, refreshTime);
     }
 
     // 百度百科去广告
