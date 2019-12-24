@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @icon         http://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片去广告
 // @author       HaoNShi
@@ -46,6 +46,8 @@
     if(location.href.indexOf('zhidao.baidu.com/question') > 0){
         $(".adTopImg").remove();
         $(".exp-topwld-tip").remove();
+        $("#wgt-ecom-banner").remove();
+        $("#wgt-ecom-right").remove();
         $(".question-number-text-chain").remove();
         $(".grid-r.qb-side").remove();
         $(".wgt-ads").remove();
