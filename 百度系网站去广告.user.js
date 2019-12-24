@@ -1,13 +1,11 @@
 // ==UserScript==
-// @name         百度知道、百度百科、百度文库去广告
+// @name         百度系网站去广告
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @icon         http://www.baidu.com/favicon.ico
-// @description  删除百度知道、百度百科、百度文库中的广告
+// @description  百度搜索、百度知道、百度百科、百度文库去广告
 // @author       HaoNShi
-// @match        *://zhidao.baidu.com/*
-// @match        *://baike.baidu.com/item*
-// @match        *://wenku.baidu.com/*
+// @match        *://*.baidu.com/*
 // @grant        none
 // @require      https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js
 // ==/UserScript==
@@ -16,7 +14,18 @@
     'use strict';
 
     // Your code here...
-    var loadTime = 1000; // 网页加载时间
+    var loadTime = 1000; // 延迟加载广告的加载时间
+    var refreshTime = 1000; // 检测反复加载广告的刷新时间
+    var newAdRefreshTime = 3500; // 百度搜索中删除广告后出现新广告的加载时间
+
+    // 百度搜索去广告
+    if(location.href.indexOf('www.baidu.com/s') > 0){
+        $("[cmatchid]").remove();
+        $("#content_right").remove();
+        setTimeout(function(){
+            $("span:contains('广告')").parent().parent().remove();
+        }, newAdRefreshTime);
+    }
 
     // 百度知道去广告
     if(location.href.indexOf('zhidao') > 0){
@@ -68,7 +77,7 @@
         $(".ggbtm-vip-close").remove();
         setInterval(function(){
             $(".view-like-recom-fc").remove();
-        }, loadTime);
+        }, refreshTime);
     }
 
 })();
