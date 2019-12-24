@@ -1,11 +1,15 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @icon         http://www.baidu.com/favicon.ico
-// @description  百度搜索、百度知道、百度百科、百度文库去广告
+// @description  百度搜索、百度知道、百度百科、百度文库、百度图片去广告
 // @author       HaoNShi
-// @match        *://*.baidu.com/*
+// @match        *://www.baidu.com/s*
+// @match        *://zhidao.baidu.com/*
+// @match        *://baike.baidu.com/*
+// @match        *://wenku.baidu.com/*
+// @match        *://image.baidu.com/search/*
 // @grant        none
 // @require      https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js
 // ==/UserScript==
@@ -16,13 +20,14 @@
     // Your code here...
     var loadTime = 1000; // 延迟加载广告的加载时间
     var refreshTime = 1000; // 检测反复加载广告的刷新时间
-    var newAdRefreshTime = 3500; // 百度搜索中删除广告后出现新广告的加载时间
+    var newAdRefreshTime = 2500; // 百度搜索中删除广告后出现新广告的加载时间
 
     // 百度搜索去广告
     if(location.href.indexOf('www.baidu.com/s') > 0){
         $("[cmatchid]").remove();
         $("#content_right").remove();
         setTimeout(function(){
+            $("span:contains('品牌广告')").parent().parent().parent().parent().parent().parent().parent().parent().parent().parent().remove();
             $("span:contains('广告')").parent().parent().remove();
         }, newAdRefreshTime);
     }
@@ -78,6 +83,18 @@
         setInterval(function(){
             $(".view-like-recom-fc").remove();
         }, refreshTime);
+    }
+
+    // 百度图片去广告
+    if(location.href.indexOf('image.baidu.com/search/index') > 0){
+        setInterval(function(){
+            $(".fcImgli").remove();
+        }, refreshTime);
+    }
+    if(location.href.indexOf('image.baidu.com/search/detail') > 0){
+        $(".text-link-ads").remove();
+        $(".rsresult-card").remove();
+        $("#adCard").remove();
     }
 
 })();
