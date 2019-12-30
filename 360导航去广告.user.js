@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         360导航去广告
-// @namespace    http://tampermonkey.net/
-// @version      1.0
+// @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
+// @version      1.1
 // @icon         http://hao.360.com/favicon.ico
 // @description  删除360导航中被标记为广告的部分
 // @author       HaoNShi
@@ -20,6 +20,7 @@
         $("#top-full-column-tips").remove(); // 顶部广告
         $("#doc").css("top", "0"); // 去除顶部广告后上移body
         $("li[notice-ad = 'true']").remove(); // 消息广告
+        $("#daily-hotwords").remove(); // 搜索热词广告
 
         $("#activity").remove(); // 左侧广告
         $(".ad").parent().remove(); // 左侧热点图片
@@ -30,6 +31,7 @@
         $("#channel-mall").remove(); // 左侧购物广告栏
         $("#channel-car").remove(); // 左侧汽车广告栏
 
+        $(".front-view-lb").remove(); // 网址栏广告
         $("#bottom_hotsite").remove(); // 类导航栏广告
         $(".ad-top").remove(); // 删除发现你喜欢
         $(".ad.infoflow-guess-mv-ad").parent().parent().parent().remove(); // 快资讯广告
