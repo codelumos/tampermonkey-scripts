@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
-// @namespace    http://tampermonkey.net/
-// @version      0.5
+// @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
+// @version      1.0
 // @icon         http://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片去广告
 // @author       HaoNShi
@@ -10,6 +10,7 @@
 // @match        *://baike.baidu.com/*
 // @match        *://wenku.baidu.com/*
 // @match        *://image.baidu.com/search/*
+// @match        *://xueshu.baidu.com/s*
 // @grant        none
 // @require      https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js
 // ==/UserScript==
@@ -100,6 +101,14 @@
         $(".text-link-ads").remove();
         $(".rsresult-card").remove();
         $("#adCard").remove();
+    }
+
+    // 伪百度学术重定向
+    if(location.href.indexOf('xueshu.baidu.com/s') > 0 && location.href.indexOf('xueshu.baidu.com/s?') <= 0){
+        window.location.replace("https://xueshu.baidu.com");
+    }
+    if(location.href.indexOf('xueshu.baidu.com/s?') > 0 && location.href.indexOf('tn=SE_baiduxueshu_c1gjeupa') <= 0){
+        window.location.replace("https://xueshu.baidu.com/s?tn=SE_baiduxueshu_c1gjeupa&"+window.location.search.substr(1));
     }
 
 })();
