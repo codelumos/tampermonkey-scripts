@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.0
+// @version      1.1
 // @icon         http://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片去广告
 // @author       HaoNShi
@@ -81,11 +81,17 @@
         $(".search-aside-adWrap").remove();
     }
     if(location.href.indexOf('wenku.baidu.com/view') > 0){
+
         $("#ggbtm-ads").remove();
         $(".union-ad-bottom").remove();
         $(".ad-vip-close-bottom").remove();
         $("#relative-videos-wrap").remove();
         $(".ggbtm-vip-close").remove();
+        setTimeout(function(){
+            $(".zsj-topbar").remove();
+            $(".lastcell-dialog").remove();
+            $(".zsj-toppos").remove();
+        }, loadTime);
         setInterval(function(){
             $(".view-like-recom-fc").remove();
         }, refreshTime);
