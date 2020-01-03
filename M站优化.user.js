@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         M站优化
-// @namespace    http://tampermonkey.net/
-// @version      1.1
+// @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
+// @version      1.2
 // @icon         http://www.bimibimi.tv/favicon.ico
 // @description  优化bimibimi：去广告，允许选中和右键，还原鼠标样式等
 // @author       HaoNShi
@@ -35,6 +35,9 @@
     $("a").hover(function() {
         $("a").css("cursor","pointer");
     })
+
+    // 删除伪搜索历史框
+    $(".search-history").remove();
 
     // 调整播放页的导航栏和关灯按钮的层级
     $(".wrapper > ul > li > ul").css("z-index", "999");
