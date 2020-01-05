@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.4
+// @version      1.5
 // @icon         http://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频去广告
 // @author       HaoNShi
@@ -36,7 +36,7 @@
     }
 
     // 百度知道去广告
-    if(location.href.indexOf('zhidao') > 0){
+    if(location.href.indexOf('zhidao.baidu.com') > 0){
         $(".shop-entrance").remove();
         $(".activity-entry").remove();
         $(".task-list-button").remove();
@@ -61,7 +61,7 @@
     }
 
     // 百度百科去广告
-    if(location.href.indexOf('baike') > 0){
+    if(location.href.indexOf('baike.baidu.com') > 0){
         setTimeout(function(){
             $("#navbarAdNew").remove();
             $(".userbar_mall").remove();
@@ -78,7 +78,7 @@
     }
 
     // 百度文库去广告
-    if(location.href.indexOf('wenku') > 0){
+    if(location.href.indexOf('wenku.baidu.com') > 0){
         $(".banner-ad").remove();
         $(".ad-box").remove();
         $("#banurl").remove();
@@ -128,34 +128,36 @@
     }
 
     // 百度视频去广告
-    if(location.href.indexOf('video') > 0 || location.href.indexOf('v.baidu.com') > 0){
+    if(location.href.indexOf('video.baidu.com') > 0 || location.href.indexOf('v.baidu.com') > 0){
         setTimeout(function(){
             $("#pallcommoncolumnad").remove(); // 顶栏广告
-            $("#PCFullScreenad").remove(); // 底栏广告
             $("#qzfcadid").remove(); // 侧边栏广告
             $("#PCallpagesidebar1").remove(); // 侧边栏广告
             $("#PCallpagesidebar2").remove(); // 侧边栏广告
             $(".bdvideo-adver-carousel").parent().remove(); // 右下角广告
             $("div[id*='adone']").remove();
             $("div[id*='adtwo']").remove();
-            // channel广告
+            // 详情页广告
+            $("#detail_adm_right").remove();
+            $(".ctt-adver1-banner").remove();
+            $("div[id*='PCDetailPageTopRightList']").remove();
+            // 频道页广告
             $("#pcshortchannelTopRight").remove();
             $("#__lawnImageContainer").parent().parent().remove();
         }, slowLoadTime);
         setInterval(function(){
             // 横幅广告
             $(".section-ad").remove();
-            $("div[id*='pcindexpageColumn']").parent().remove();
-            $("#PCindexColumnTVshow").remove();
+            $(".full-collunm-ad").remove();
+            $("div[id*='channelBannerAdver']").remove();
+            $("div[id*='channelColumn']").parent().remove();
+            $("div[id*='ChannelColumn']").parent().remove();
             // 条目中的广告
-            $("div[id*='PCFocusPoster']").remove(); // 最新要闻广告
-            $("div[id*='pcindex']").remove();
-            $("div[id*='pcIndex']").remove();
-            $("div[id*='PCindex']").remove();
-            $("div[id*='PCIndex']").remove();
+            $("div[id*='pc']").remove();
+            $("div[id*='PC']").remove();
             $("div[id*='adv-carousel-item']").parent().remove(); // 热点聚焦广告
             $("[id*='FeedAdSys']").remove(); // 热门推荐广告
-            $("div[id*='PCbashortchannelRight']").parent().remove(); // 相关推荐广告
+            $("div[id*='TabAd']").remove();
         }, refreshTime);
     }
 
