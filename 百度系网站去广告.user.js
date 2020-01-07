@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.6
+// @version      1.7
 // @icon         http://www.baidu.com/favicon.ico
-// @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频去广告
+// @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧去广告
 // @author       HaoNShi
 // @match        *://www.baidu.com/s*
 // @match        *://zhidao.baidu.com/*
@@ -13,6 +13,7 @@
 // @match        *://xueshu.baidu.com/s*
 // @match        *://v.baidu.com/*
 // @match        *://video.baidu.com/*
+// @match        *://tieba.baidu.com/*
 // @grant        none
 // @require      https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js
 // ==/UserScript==
@@ -159,6 +160,18 @@ jQuery.noConflict();
             $("div[id*='adv-carousel-item']").parent().remove(); // 热点聚焦广告
             $("[id*='FeedAdSys']").remove(); // 热门推荐广告
             $("div[id*='TabAd']").remove();
+        }, refreshTime);
+    }
+
+    // 百度贴吧去广告
+    if(location.href.indexOf('tieba.baidu.com/f') > 0){
+        setInterval(function(){
+            $("span:contains('广告')").parent().parent().parent().parent().parent().remove();
+        }, refreshTime);
+    }
+    if(location.href.indexOf('tieba.baidu.com/p') > 0){
+        setInterval(function(){
+            $("span:contains('广告')").parent().parent().parent().parent().parent().parent().remove();
         }, refreshTime);
     }
 
