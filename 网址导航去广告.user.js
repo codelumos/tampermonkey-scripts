@@ -1,21 +1,24 @@
 // ==UserScript==
 // @name         网址导航去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.2
+// @version      1.3
 // @icon         http://www.hao123.com/favicon.ico
-// @description  hao123、360导航去广告
+// @description  hao123、2345网址导航、360导航去广告
 // @author       HaoNShi
-// @match        *://hao.360.com/*
 // @match        *://www.hao123.com/*
+// @match        *://www.2345.com/*
+// @match        *://hao.360.com/*
 // @grant        none
 // @require      https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js
 // ==/UserScript==
 
-(function() {
+jQuery.noConflict();
+(function($) {
     'use strict';
 
     // Your code here...
     var refreshTime = 1000; // 检测广告的刷新时间
+    var loadTime = 1000; // 延迟加载广告的加载时间
 
     // hao123去广告
     if(location.href.indexOf('hao123.com') > 0){
@@ -25,6 +28,24 @@
         $(".rightTip").remove(); // 右下角广告
         setInterval(function(){
             $(".wm").remove(); // 推荐栏广告
+        }, refreshTime);
+    }
+
+    // 2345网址导航去广告
+    if(location.href.indexOf('2345.com') > 0){
+        $(".tip_stopXP").remove(); // 顶栏广告
+        $(".top_left").remove(); // 顶栏广告
+        $("#headerHb").remove(); // 下拉红包广告
+        $(".mes-area").remove(); // 消息轮播广告
+        $("#actNavspec").remove(); // 导航栏广告
+        $(".event1").remove(); // 右侧广告
+        setTimeout(function(){
+            $("#topHf").remove(); // 顶栏广告
+        }, refreshTime);
+        setInterval(function(){
+            $(".item-feed").remove(); // 实时热点广告
+            $("div[id*='bd-lvy']").remove(); // 栏目右上角广告
+            $(".item-wm-lvy").remove(); // 今日头条、热点排行广告
         }, refreshTime);
     }
 
@@ -72,4 +93,4 @@
         $(".plane-bd").find('li:eq(3)').remove(); // 右侧对应理财导航
     }
 
-})();
+})(jQuery);
