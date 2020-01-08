@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.8
+// @version      1.9
 // @icon         http://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧去广告
 // @author       HaoNShi
@@ -23,16 +23,23 @@ jQuery.noConflict();
     'use strict';
 
     // Your code here...
-    var loadTime = 1000; // 延迟加载广告的加载时间
-    var slowLoadTime = 2500; // 高延迟加载广告的加载时间
-    var refreshTime = 1000; // 检测反复加载广告的刷新时间
+    var loadTime = 1000;		// 延迟加载广告的加载时间
+    var slowLoadTime = 2500;	// 高延迟加载广告的加载时间
+    var refreshTime = 1000;		// 反复加载广告的检测刷新时间
 
     // 百度搜索去广告
     if(location.href.indexOf('www.baidu.com/s') > 0){
         $("[cmatchid]").remove();
         $("#content_right").remove();
+    }
+    if(location.href.indexOf('www.baidu.com/s?') > 0){
+        $("#content_left").find("div:eq(0)").each(function() {
+            var id = String($(this).attr("id"));
+            if (id == "undefined") {
+                $(this).remove();
+            }
+        })
         setTimeout(function(){
-            $("span:contains('品牌广告')").parent().parent().parent().parent().parent().parent().parent().parent().parent().parent().remove();
             $("span:contains('广告')").parent().parent().remove();
         }, slowLoadTime);
     }
