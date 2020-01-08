@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.7
+// @version      1.8
 // @icon         http://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧去广告
 // @author       HaoNShi
@@ -100,6 +100,8 @@ jQuery.noConflict();
         $(".union-ad-bottom").remove();
         $(".ad-vip-close-bottom").remove();
         $("#relative-videos-wrap").remove();
+        $(".add-has-money-pay").remove();
+        $(".wk-color-vip-red").parent().parent().remove();
         setTimeout(function(){
             $(".wangpan-tip").remove();
             $(".new-user-discount-tip").remove();
