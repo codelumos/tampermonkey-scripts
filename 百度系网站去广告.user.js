@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.10
+// @version      1.11
 // @icon         http://www.baidu.com/favicon.ico
-// @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图去广告
+// @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验去广告
 // @author       HaoNShi
 // @match        *://www.baidu.com/s*
 // @match        *://zhidao.baidu.com/*
@@ -15,6 +15,7 @@
 // @match        *://video.baidu.com/*
 // @match        *://tieba.baidu.com/*
 // @match        *://map.baidu.com/*
+// @match        *://jingyan.baidu.com/*
 // @grant        none
 // @require      https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js
 // ==/UserScript==
@@ -42,7 +43,12 @@ jQuery.noConflict();
             }
         })
         setTimeout(function(){
-            $("span:contains('广告')").parent().parent().remove();
+            $("span").each(function() {
+                if ($(this)[0].innerHTML == '广告') {
+                    console.log($(this)[0].innerHTML);
+                    $(this).parent().parent().remove();
+                }
+            })
         }, slowLoadTime);
     }
 
@@ -210,9 +216,21 @@ jQuery.noConflict();
     // 百度地图去广告
     if(location.href.indexOf('map.baidu.com/search') > 0){
         // 品牌广告
-        setTimeout(function(){
+        setInterval(function(){
             $(".damoce-search-item.damoce-search-item-nopoi").remove();
         }, loadTime);
+    }
+
+    // 百度经验去广告
+    if(location.href.indexOf('jingyan.baidu.com/search') > 0){
+        $(".ec_ad").parent().remove();
+    }
+    if(location.href.indexOf('jingyan.baidu.com/article') > 0){
+        $("#fresh-share-exp-e").remove();
+        $(".wgt-income-money").remove();
+        $(".aside-pro-container").remove();
+        $("#bottom-ads-container").remove();
+        $(".magzine-list").remove();
     }
 
 })(jQuery);
