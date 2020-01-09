@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.9
+// @version      1.10
 // @icon         http://www.baidu.com/favicon.ico
-// @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧去广告
+// @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图去广告
 // @author       HaoNShi
 // @match        *://www.baidu.com/s*
 // @match        *://zhidao.baidu.com/*
@@ -14,6 +14,7 @@
 // @match        *://v.baidu.com/*
 // @match        *://video.baidu.com/*
 // @match        *://tieba.baidu.com/*
+// @match        *://map.baidu.com/*
 // @grant        none
 // @require      https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js
 // ==/UserScript==
@@ -33,6 +34,7 @@ jQuery.noConflict();
         $("#content_right").remove();
     }
     if(location.href.indexOf('www.baidu.com/s?') > 0){
+        // 品牌广告
         $("#content_left").find("div:eq(0)").each(function() {
             var id = String($(this).attr("id"));
             if (id == "undefined") {
@@ -54,6 +56,9 @@ jQuery.noConflict();
         $(".bannerdown").remove();
         $(".aside.fixheight").remove();
         $(".wgt-bottom-ask").remove();
+        // 品牌广告
+        $(".leftup").remove();
+        $(".wgt-iknow-special-business").remove();
     }
     if(location.href.indexOf('zhidao.baidu.com/question') > 0){
         $(".adTopImg").remove();
@@ -77,6 +82,9 @@ jQuery.noConflict();
         }, loadTime);
     }
     if(location.href.indexOf('baike.baidu.com/item') > 0){
+        // 品牌广告
+        $(".before-content").remove();
+        $(".configModuleBanner").remove();
         setTimeout(function(){
             $(".topA").remove();
             $(".right-ad").remove();
@@ -120,6 +128,8 @@ jQuery.noConflict();
 
     // 百度图片去广告
     if(location.href.indexOf('image.baidu.com/search/index') > 0){
+        // 品牌广告
+        $("#pnlBeforeContent").remove();
         setInterval(function(){
             $(".fcImgli").remove();
         }, refreshTime);
@@ -142,6 +152,7 @@ jQuery.noConflict();
     if(location.href.indexOf('video.baidu.com') > 0 || location.href.indexOf('v.baidu.com') > 0){
         setTimeout(function(){
             $("#pallcommoncolumnad").remove(); // 顶栏广告
+            $("#index_right_top").remove(); // 搜索栏右侧广告
             $("#qzfcadid").remove(); // 侧边栏广告
             $("#PCallpagesidebar1").remove(); // 侧边栏广告
             $("#PCallpagesidebar2").remove(); // 侧边栏广告
@@ -171,9 +182,21 @@ jQuery.noConflict();
             $("div[id*='TabAd']").remove();
         }, refreshTime);
     }
+    if(location.href.indexOf('www.baidu.com/sf/vsearch') > 0){
+        // 品牌广告
+        $("#s_tab").next().next().each(function() {
+            var id = String($(this).attr("id"));
+            if (id == "undefined") {
+                $(this).remove();
+            }
+        })
+    }
 
     // 百度贴吧去广告
-    if(location.href.indexOf('tieba.baidu.com/f') > 0){
+    if(location.href.indexOf('tieba.baidu.com/f/search') > 0){
+        $(".s_aside").remove();
+    }
+    if(location.href.indexOf('tieba.baidu.com/f?') > 0){
         setInterval(function(){
             $("span:contains('广告')").parent().parent().parent().parent().parent().remove();
         }, refreshTime);
@@ -182,6 +205,14 @@ jQuery.noConflict();
         setInterval(function(){
             $("span:contains('广告')").parent().parent().parent().parent().parent().parent().remove();
         }, refreshTime);
+    }
+
+    // 百度地图去广告
+    if(location.href.indexOf('map.baidu.com/search') > 0){
+        // 品牌广告
+        setTimeout(function(){
+            $(".damoce-search-item.damoce-search-item-nopoi").remove();
+        }, loadTime);
     }
 
 })(jQuery);
