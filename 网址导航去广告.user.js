@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         网址导航去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.4
+// @version      1.5
 // @icon         http://www.hao123.com/favicon.ico
-// @description  hao123、2345网址导航、360导航、搜狗网址导航、QQ导航去广告
+// @description  hao123、2345网址导航、360导航、搜狗网址导航、QQ导航、UC导航去广告
 // @author       HaoNShi
 // @match        *://www.hao123.com/*
 // @match        *://www.2345.com/*
@@ -11,6 +11,7 @@
 // @match        *://123.sogou.com/*
 // @match        *://hao.qq.com/*
 // @match        *://daohang.qq.com/*
+// @match        *://www.uc123.com/*
 // @grant        none
 // @require      https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js
 // ==/UserScript==
@@ -20,8 +21,9 @@ jQuery.noConflict();
     'use strict';
 
     // Your code here...
-    var loadTime = 1000; // 延迟加载广告的加载时间
-    var refreshTime = 1000; // 检测广告的刷新时间
+    var loadTime = 1000;		// 延迟加载广告的加载时间
+    var slowLoadTime = 2500;	// 高延迟加载广告的加载时间
+    var refreshTime = 1000;		// 反复加载广告的检测刷新时间
 
     // hao123去广告
     if(location.href.indexOf('hao123.com') > 0){
@@ -87,7 +89,6 @@ jQuery.noConflict();
             $("#popup_news").remove(); // 下方悬浮广告
             $(".festival_float_bottom-leftBottom").remove();// 左下角广告
             $("#large2small").remove(); // 右下角广告
-
         }, refreshTime);
 
         $(".notice-panel-count").text("(2)"); // 修改顶部消息数量
@@ -98,6 +99,7 @@ jQuery.noConflict();
 
     // 搜狗网址导航、QQ导航（上网导航）去广告
     if(location.href.indexOf('123.sogou.com') > 0 || location.href.indexOf('hao.qq.com') > 0 || location.href.indexOf('daohang.qq.com') > 0){
+        $("#sdtom").parent().remove(); // 悬浮广告
         $("div[id*='AD']").remove();
         $(".hd-slider").remove(); // 邮箱右侧广告
         $(".cs_right_hw").remove(); // 搜索栏右侧广告
@@ -115,6 +117,18 @@ jQuery.noConflict();
             $("div[pbflag='coolsitefeed_ad']").remove(); // 焦点条目广告
             $("div[pbflag='bt_newsb_ad']").remove(); // 信息流条目广告
         }, refreshTime);
+    }
+
+    // UC导航去广告
+    if(location.href.indexOf('uc123.com') > 0){
+        $(".header-push-container").remove(); // 顶栏广告
+        $(".s-push-box").remove(); // 搜索栏广告
+        $(".m-links").remove(); // 文字栏广告
+        $(".side-hot").remove(); // 左侧广告
+        $(".cool").remove(); // 左侧空位
+        setTimeout(function(){
+            $("#J_shopping").remove(); // 阿里妈妈推广
+        }, slowLoadTime);
     }
 
 })(jQuery);
