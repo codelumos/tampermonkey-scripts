@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.11
+// @version      1.12
 // @icon         http://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验去广告
 // @author       HaoNShi
@@ -172,7 +172,7 @@ jQuery.noConflict();
             // 频道页广告
             $("#pcshortchannelTopRight").remove();
             $("#__lawnImageContainer").parent().parent().remove();
-        }, slowLoadTime);
+        }, loadTime);
         setInterval(function(){
             // 横幅广告
             $(".section-ad").remove();
@@ -186,6 +186,23 @@ jQuery.noConflict();
             $("div[id*='adv-carousel-item']").parent().remove(); // 热点聚焦广告
             $("[id*='FeedAdSys']").remove(); // 热门推荐广告
             $("div[id*='TabAd']").remove();
+        }, refreshTime);
+    }
+    if(location.href.indexOf('video.baidu.com/v') > 0 || location.href.indexOf('v.baidu.com/v') > 0){
+        // 品牌广告
+        $(".top-ad-cont").remove();
+        setTimeout(function(){
+            // 横幅广告
+            $("div[id*='searchMoreLong']").remove();
+            $("#searchPagefeedBanner").remove();
+            $(".side-content").remove();
+            $("#psBottomColumn").parent().remove();
+        }, loadTime);
+        setInterval(function(){
+            // 条目中的广告
+            $("#searchResultAdOne").remove();
+            $("#searchHotShortSeven").remove();
+            $("#searchHotShortSevenTwo").remove();
         }, refreshTime);
     }
     if(location.href.indexOf('www.baidu.com/sf/vsearch') > 0){
