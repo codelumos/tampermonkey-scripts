@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         网址导航去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.5
+// @version      1.6
 // @icon         http://www.hao123.com/favicon.ico
-// @description  hao123、2345网址导航、360导航、搜狗网址导航、QQ导航、UC导航去广告
+// @description  hao123、2345网址导航、360导航、搜狗网址导航、QQ导航、UC导航、毒霸网址大全去广告
 // @author       HaoNShi
 // @match        *://www.hao123.com/*
 // @match        *://www.2345.com/*
@@ -12,6 +12,8 @@
 // @match        *://hao.qq.com/*
 // @match        *://daohang.qq.com/*
 // @match        *://www.uc123.com/*
+// @match        *://www.duba.com/*
+// @match        *://www.newduba.cn/*
 // @grant        none
 // @require      https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js
 // ==/UserScript==
@@ -56,17 +58,13 @@ jQuery.noConflict();
 
     // 360导航去广告
     if(location.href.indexOf('hao.360.com') > 0){
-        setInterval(function(){
+        setTimeout(function(){
             $("#top-full-column-tips").remove(); // 顶栏广告
             $("#doc").css("top", "0"); // 去除顶部广告后上移body
             $("li[notice-ad = 'true']").remove(); // 消息广告
             $("#daily-hotwords").remove(); // 搜索热词广告
 
             $("#activity").remove(); // 左侧广告
-            $(".ad").parent().remove(); // 左侧热点图片
-            $(".textlink_ad_icon").parent().remove(); // 热点广告条目
-            $(".ad-textlink").parent().remove(); // 猜你爱看广告条目
-
             $("#channel-game").remove(); // 左侧游戏广告栏
             $("#channel-mall").remove(); // 左侧购物广告栏
             $("#channel-car").remove(); // 左侧汽车广告栏
@@ -74,11 +72,6 @@ jQuery.noConflict();
             $(".front-view-lb").remove(); // 网址栏广告
             $("#bottom_hotsite").remove(); // 类导航栏广告
             $(".ad-top").remove(); // 删除发现你喜欢
-            $(".ad.infoflow-guess-mv-ad").parent().parent().parent().remove(); // 快资讯广告
-            $(".infoflow-item.mv").remove(); // 娱乐头条广告
-            $(".mv").remove(); // 游戏攻略广告
-            $(".clearfix.feed-mv.js-mv-infoflow-item").remove(); // 娱乐沸点广告
-            $(".feed-item.feed-mv.js-mv-infoflow-item").remove(); // 推荐广告
 
             $("#service-gouwu").remove(); // 购物广告
             $("#service-youxi").remove(); // 游戏广告
@@ -89,6 +82,17 @@ jQuery.noConflict();
             $("#popup_news").remove(); // 下方悬浮广告
             $(".festival_float_bottom-leftBottom").remove();// 左下角广告
             $("#large2small").remove(); // 右下角广告
+        }, loadTime);
+        setInterval(function(){
+            $(".ad").parent().remove(); // 左侧热点图片
+            $(".textlink_ad_icon").parent().remove(); // 热点广告条目
+            $(".ad-textlink").parent().remove(); // 猜你爱看广告条目
+
+            $(".ad.infoflow-guess-mv-ad").parent().parent().parent().remove(); // 快资讯广告
+            $(".infoflow-item.mv").remove(); // 娱乐头条广告
+            $(".mv").remove(); // 游戏攻略广告
+            $(".clearfix.feed-mv.js-mv-infoflow-item").remove(); // 娱乐沸点广告
+            $(".feed-item.feed-mv.js-mv-infoflow-item").remove(); // 推荐广告
         }, refreshTime);
 
         $(".notice-panel-count").text("(2)"); // 修改顶部消息数量
@@ -129,6 +133,39 @@ jQuery.noConflict();
         setTimeout(function(){
             $("#J_shopping").remove(); // 阿里妈妈推广
         }, slowLoadTime);
+    }
+
+    // 毒霸网址大全去广告
+    if(location.href.indexOf('duba.com') > 0 || location.href.indexOf('newduba.cn') > 0){
+        // 资讯版
+        $("#js-ysjpp").remove(); // 右上角广告
+        $("#J_sideFooter").remove(); // 右下角广告
+        $("div[opname='w_search_right_ad']").remove(); // 搜索栏右侧广告
+        $(".rtcenter_game.jq_rtcenter_game").remove(); // 文字栏广告
+        $(".fav_box_wrap").remove(); // 猜你喜欢广告
+        $(".side_game").remove(); // 左侧游戏广告
+        $(".side_taobao").remove(); // 左侧购物广告
+        $(".left_ad_collection").remove(); // 左侧热点排行广告
+        // 标准版
+        $(".top_func_ad").remove(); // 右上角广告
+        $(".fav_box").remove(); // 猜你喜欢广告
+        $(".taobao_search").remove(); // 购物广告
+        $(".sort_wm").remove(); // 猜你感兴趣广告
+        $(".sort_line").remove();
+        $(".box_shopping").remove(); // 热门购物广告
+        $(".box_happy").remove(); // 休闲娱乐广告
+        // 精简版
+        $("div[class*='baidu_ad']").remove();
+        setInterval(function(){
+            // 资讯版
+            $(".jqrp_infoflow_ad").remove(); // 信息流条目广告
+            // 标准版
+            $(".tj_ul").remove(); // 邮箱上方广告
+            $(".ads-tag").parent().parent().parent().remove(); // 热点新闻广告
+            $(".newslist > div").remove(); // 信息流条目广告
+            // 精简版
+            $(".mediavAd").remove(); // 信息流条目广告
+        }, refreshTime);
     }
 
 })(jQuery);
