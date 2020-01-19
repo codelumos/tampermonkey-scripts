@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.12
+// @version      1.13
 // @icon         http://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验去广告
 // @author       HaoNShi
@@ -77,7 +77,7 @@ jQuery.noConflict();
         $(".wgt-bottom-union").remove();
         setTimeout(function(){
             $(".ec-pc_mat_coeus__related_link_text-content").remove();
-        }, refreshTime);
+        }, loadTime);
     }
 
     // 百度百科去广告
@@ -105,6 +105,8 @@ jQuery.noConflict();
         $(".banner-ad").remove();
         $(".ad-box").remove();
         $("#banurl").remove();
+        $("#my-wkHome-vip-tips").parent().remove();
+        $(".vip-card").remove();
         setTimeout(function(){
             $(".zsj-topbar").remove();
             $(".lastcell-dialog").remove();
@@ -123,9 +125,20 @@ jQuery.noConflict();
         $("#relative-videos-wrap").remove();
         $(".add-has-money-pay").remove();
         $(".wk-color-vip-red").parent().parent().remove();
+        $(".vip-tips-wrap").parent().remove();
+        $(".top-ads-banner-wrap").remove();
+
+        $(".operation-wrapper").remove();
+        $(".relative-course-wrapper").remove();
+        $(".hot-search-wrapper").remove();
+        $(".hx-right-wrapper").remove();
+        $(".hx-bottom-wrapper").remove();
+        $(".relative-recommend-wrapper").remove();
         setTimeout(function(){
             $(".wangpan-tip").remove();
             $(".new-user-discount-tip").remove();
+            $(".pay-vip-btn-wrap").remove();
+            $(".relative-doc-ad-wrapper").remove();
         }, loadTime);
         setInterval(function(){
             $(".view-like-recom-fc").remove();
