@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         网址导航去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.6
+// @version      1.7
 // @icon         http://www.hao123.com/favicon.ico
 // @description  hao123、2345网址导航、360导航、搜狗网址导航、QQ导航、UC导航、毒霸网址大全去广告
 // @author       HaoNShi
@@ -33,6 +33,9 @@ jQuery.noConflict();
         $(".header__item.header__item--joke").remove(); // 邮箱上方广告
         $("#bottom-be").remove(); // 左下角广告
         $(".rightTip").remove(); // 右下角广告
+        setTimeout(function(){
+            $(".bottom-banner-link-wrapper").remove(); // 底部广告
+        }, loadTime);
         setInterval(function(){
             $(".wm").remove(); // 推荐栏广告
         }, refreshTime);
@@ -46,6 +49,9 @@ jQuery.noConflict();
         $(".mes-area").remove(); // 消息轮播广告
         $("#actNavspec").remove(); // 导航栏广告
         $(".event1").remove(); // 右侧广告
+        $("#J_broadcast").remove(); // 邮箱上方广告
+        $(".mzdh_bottom").remove(); // 中间栏广告
+        $("h3:contains('发现你喜欢')").parent().parent().parent().remove(); // 发现你喜欢广告
         setTimeout(function(){
             $("#topHf").remove(); // 顶栏广告
         }, loadTime);
@@ -95,7 +101,7 @@ jQuery.noConflict();
             $(".feed-item.feed-mv.js-mv-infoflow-item").remove(); // 推荐广告
         }, refreshTime);
 
-        $(".notice-panel-count").text("(2)"); // 修改顶部消息数量
+        // $(".notice-panel-count").text("(2)"); // 修改顶部消息数量
         $(".plane-bd").find('li:eq(2)').remove(); // 右侧对应购物导航
         $(".plane-bd").find('li:eq(2)').remove(); // 右侧对应游戏导航
         $(".plane-bd").find('li:eq(3)').remove(); // 右侧对应理财导航
@@ -109,6 +115,7 @@ jQuery.noConflict();
         $(".cs_right_hw").remove(); // 搜索栏右侧广告
         $(".ads").remove(); // 导航栏广告
         $(".banner-ad").remove(); // 导航栏广告
+        $("ul[pbflag='top3ad'] li:eq(0)").remove(); // 邮箱上方广告
         $("div[pbflag='guess']").remove(); // 猜你喜欢广告
         $("div[pbflag='rec_shop']").remove(); // 左侧购物广告
         $(".adword").remove(); // 文字栏广告
@@ -130,6 +137,7 @@ jQuery.noConflict();
         $(".m-links").remove(); // 文字栏广告
         $(".side-hot").remove(); // 左侧广告
         $(".cool").remove(); // 左侧空位
+        $("#J_shopping").remove(); // 阿里妈妈推广
         setTimeout(function(){
             $("#J_shopping").remove(); // 阿里妈妈推广
         }, slowLoadTime);
@@ -137,6 +145,7 @@ jQuery.noConflict();
 
     // 毒霸网址大全去广告
     if(location.href.indexOf('duba.com') > 0 || location.href.indexOf('newduba.cn') > 0){
+        $(".skin_bg").remove(); // 背景广告
         // 资讯版
         $("#js-ysjpp").remove(); // 右上角广告
         $("#J_sideFooter").remove(); // 右下角广告
