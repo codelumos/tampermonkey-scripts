@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.15
+// @version      1.16
 // @icon         http://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验去广告
 // @author       HaoNShi
@@ -242,9 +242,12 @@ jQuery.noConflict();
         }, refreshTime);
     }
     if(location.href.indexOf('tieba.baidu.com/p') > 0){
-        setInterval(function(){
-            $("span:contains('广告')").parent().parent().parent().parent().parent().parent().remove();
-        }, refreshTime);
+        $("#j_p_postlist").find("div").each(function() {
+            var isAd = String($(this).attr("ad-dom-img"));
+            if (isAd == "true") {
+                $(this).remove();
+            }
+        })
     }
 
     // 百度地图去广告
