@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         网址导航去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.7
+// @version      1.8
 // @icon         http://www.hao123.com/favicon.ico
 // @description  hao123、2345网址导航、360导航、搜狗网址导航、QQ导航、UC导航、毒霸网址大全去广告
 // @author       HaoNShi
@@ -62,49 +62,35 @@ jQuery.noConflict();
         }, refreshTime);
     }
 
+    // 重定向新版360导航
+    if(location.href.indexOf('hao.360') > 0 && location.href.indexOf('2020') <= 0){
+        window.location.replace("https://hao.360.com/2020.html");
+    }
     // 360导航去广告
-    if(location.href.indexOf('hao.360.com') > 0){
+    if(location.href.indexOf('hao.360') > 0){
         setTimeout(function(){
-            $("#top-full-column-tips").remove(); // 顶栏广告
-            $("#doc").css("top", "0"); // 去除顶部广告后上移body
+            $("#corner-flash").remove(); // 右上角广告
             $("li[notice-ad = 'true']").remove(); // 消息广告
-            $("#daily-hotwords").remove(); // 搜索热词广告
+            $(".notice-panel-count").text("(2)"); // 修改顶部消息数量
+            $("#daily-hotwords").remove(); // 搜索框右侧搜索热词广告
+
+            $("#hotsite-view-front").remove(); // 名站推荐广告
 
             $("#activity").remove(); // 左侧广告
-            $("#channel-game").remove(); // 左侧游戏广告栏
-            $("#channel-mall").remove(); // 左侧购物广告栏
-            $("#channel-car").remove(); // 左侧汽车广告栏
+            $(".pubble-shape-wrap").remove(); // 360游戏广告
 
-            $(".front-view-lb").remove(); // 网址栏广告
-            $("#bottom_hotsite").remove(); // 类导航栏广告
-            $(".ad-top").remove(); // 删除发现你喜欢
+            $("h3:contains('发现你喜欢')").parent().parent().remove(); // 发现你喜欢广告
 
-            $("#service-gouwu").remove(); // 购物广告
-            $("#service-youxi").remove(); // 游戏广告
-            $("#service-licai").remove(); // 金融广告
-
-            $(".plane-hd.plane-adsvc").remove(); // 右侧导航栏广告
-            $("#festival_float_bottom").remove(); // 底部横幅广告
-            $("#popup_news").remove(); // 下方悬浮广告
-            $(".festival_float_bottom-leftBottom").remove();// 左下角广告
             $("#large2small").remove(); // 右下角广告
+
         }, loadTime);
         setInterval(function(){
-            $(".ad").parent().remove(); // 左侧热点图片
-            $(".textlink_ad_icon").parent().remove(); // 热点广告条目
-            $(".ad-textlink").parent().remove(); // 猜你爱看广告条目
-
-            $(".ad.infoflow-guess-mv-ad").parent().parent().parent().remove(); // 快资讯广告
-            $(".infoflow-item.mv").remove(); // 娱乐头条广告
-            $(".mv").remove(); // 游戏攻略广告
-            $(".clearfix.feed-mv.js-mv-infoflow-item").remove(); // 娱乐沸点广告
-            $(".feed-item.feed-mv.js-mv-infoflow-item").remove(); // 推荐广告
+            $(".js-mv-infoflow-item").remove(); // 右侧推荐条目广告
+            $(".ad").parent().remove(); // 右侧图片条目广告
+            $(".textlink_ad_icon").parent().remove(); //右侧文字条目广告
+            $("a[class*='mediav-ads']").remove(); // 左侧热门视频等条目广告
         }, refreshTime);
 
-        // $(".notice-panel-count").text("(2)"); // 修改顶部消息数量
-        $(".plane-bd").find('li:eq(2)').remove(); // 右侧对应购物导航
-        $(".plane-bd").find('li:eq(2)').remove(); // 右侧对应游戏导航
-        $(".plane-bd").find('li:eq(3)').remove(); // 右侧对应理财导航
     }
 
     // 搜狗网址导航、QQ导航（上网导航）去广告
