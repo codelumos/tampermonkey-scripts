@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         M站优化
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.3
-// @icon         http://www.bimibimi.tv/favicon.ico
+// @version      1.4
+// @icon         http://www.bimibimi.me/favicon.ico
 // @description  bimibimi去广告以及其他一系列优化
 // @author       HaoNShi
-// @match        *://www.bimibimi.tv/*
+// @match        *://www.bimibimi.me/*
 // @grant        none
 // ==/UserScript==
 
@@ -16,7 +16,7 @@
     $("div[style]").each(function() {
         if ($(this).css("z-index") == "2147483647") {
             $(this).remove();
-        } else if ($(this).css("z-index") == "2147483") {
+        } else if ($(this).css("z-index") == "2147483600") {
             $(this).remove();
         }
     })
