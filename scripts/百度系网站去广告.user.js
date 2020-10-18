@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.17
+// @version      2.0
 // @icon         http://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验去广告
 // @author       HaoNShi
@@ -31,136 +31,135 @@ jQuery.noConflict();
 
     // 百度搜索去广告
     if(location.href.indexOf('www.baidu.com/s') > 0){
-        $("[cmatchid]").remove();
-        $("#content_right").remove();
+        setInterval(function(){
+            $("[cmatchid]").remove();
+            $("#content_right").remove();
+        }, refreshTime);
     }
     if(location.href.indexOf('www.baidu.com/s?') > 0){
-        // 品牌广告
-        $("#content_left").find("div:eq(0)").each(function() {
-            var id = String($(this).attr("id"));
-            if (id == "undefined") {
-                $(this).remove();
-            }
-        })
-        setTimeout(function(){
+        setInterval(function(){
+            // 品牌广告
+            $("#content_left").find("div:eq(0)").each(function() {
+                var id = String($(this).attr("id"));
+                if (id == "undefined") {
+                    $(this).remove();
+                }
+            })
             $("span").each(function() {
                 if ($(this)[0].innerHTML == '广告') {
                     console.log($(this)[0].innerHTML);
                     $(this).parent().parent().remove();
                 }
             })
-        }, slowLoadTime);
+        }, refreshTime);
     }
 
     // 百度知道去广告
     if(location.href.indexOf('zhidao.baidu.com') > 0){
-        $(".shop-entrance").remove();
-        $(".activity-entry").remove();
-        $(".task-list-button").remove();
+        setInterval(function(){
+            $(".shop-entrance").remove();
+            $(".activity-entry").remove();
+            $(".task-list-button").remove();
+        }, refreshTime);
     }
     if(location.href.indexOf('zhidao.baidu.com/search') > 0){
-        $(".bannerdown").remove();
-        $(".aside.fixheight").remove();
-        $(".wgt-bottom-ask").remove();
-        // 品牌广告
-        $(".leftup").remove();
-        $(".wgt-iknow-special-business").remove();
+        setInterval(function(){
+            $(".bannerdown").remove();
+            $(".aside.fixheight").remove();
+            $(".wgt-bottom-ask").remove();
+            // 品牌广告
+            $(".leftup").remove();
+            $(".wgt-iknow-special-business").remove();
+        }, refreshTime);
     }
     if(location.href.indexOf('zhidao.baidu.com/question') > 0){
-        $(".adTopImg").remove();
-        $(".exp-topwld-tip").remove();
-        $("#wgt-ecom-banner").remove();
-        $("#wgt-ecom-right").remove();
-        $(".question-number-text-chain").remove();
-        $(".grid-r.qb-side").remove();
-        $(".wgt-ads").remove();
-        $(".wgt-bottom-union").remove();
-        setTimeout(function(){
+        setInterval(function(){
+            $(".adTopImg").remove();
+            $(".exp-topwld-tip").remove();
+            $("#wgt-ecom-banner").remove();
+            $("#wgt-ecom-right").remove();
+            $(".question-number-text-chain").remove();
+            $(".grid-r.qb-side").remove();
+            $(".wgt-ads").remove();
+            $(".wgt-bottom-union").remove();
             $(".ec-pc_mat_coeus__related_link_text-content").remove();
-        }, loadTime);
+        }, refreshTime);
     }
 
     // 百度百科去广告
     if(location.href.indexOf('baike.baidu.com') > 0){
-        setTimeout(function(){
+        setInterval(function(){
             $("#navbarAdNew").remove();
             $(".userbar_mall").remove();
-        }, loadTime);
+        }, refreshTime);
     }
     if(location.href.indexOf('baike.baidu.com/item') > 0){
-        // 品牌广告
-        $(".pinzhuanWrap").remove();
-        $(".configModuleBanner").remove();
-        setTimeout(function(){
+        setInterval(function(){
+            // 品牌广告
+            $(".pinzhuanWrap").remove();
+            $(".configModuleBanner").remove();
             $(".topA").remove();
             $(".right-ad").remove();
             $(".lemmaWgt-promotion-vbaike").remove();
             $(".lemmaWgt-promotion-slide").remove();
             $("#side_box_unionAd").remove();
-        }, loadTime);
+        }, refreshTime);
     }
 
     // 百度文库去广告
     if(location.href.indexOf('wenku.baidu.com') > 0){
-        $(".banner-ad").remove();
-        $(".ad-box").remove();
-        $("#banurl").remove();
-        $("#my-wkHome-vip-tips").parent().remove();
-        $(".vip-card").remove();
-        setTimeout(function(){
+        setInterval(function(){
+            $(".banner-ad").remove();
+            $(".ad-box").remove();
+            $("#banurl").remove();
+            $("#my-wkHome-vip-tips").parent().remove();
+            $(".vip-card").remove();
             $(".zsj-topbar").remove();
             $(".lastcell-dialog").remove();
             $(".zsj-toppos").remove();
-        }, loadTime);
+        }, refreshTime);
     }
     if(location.href.indexOf('wenku.baidu.com/search') > 0){
-        $("#fengchaoad").remove();
-        $(".yuedu-recommend-wrap").remove();
-        $(".search-aside-adWrap").remove();
+        setInterval(function(){
+            $("#fengchaoad").remove();
+            $(".yuedu-recommend-wrap").remove();
+            $(".search-aside-adWrap").remove();
+        }, refreshTime);
     }
     if(location.href.indexOf('wenku.baidu.com/view') > 0){
-        $("#ggbtm").parent().remove();
-        $(".union-ad-bottom").remove();
-        $(".ad-vip-close-bottom").remove();
-        $("#relative-videos-wrap").remove();
-        $(".add-has-money-pay").remove();
-        $(".wk-color-vip-red").parent().parent().remove();
-        $(".vip-tips-wrap").parent().remove();
-        $(".top-ads-banner-wrap").remove();
-
-        $(".operation-wrapper").remove();
-        $(".relative-course-wrapper").remove();
-        $(".hot-search-wrapper").remove();
-        $(".hx-right-wrapper").remove();
-        $(".hx-bottom-wrapper").remove();
-        $(".relative-recommend-wrapper").remove();
-        $(".fc-container").remove();
-
-        $("#ggbtm-ads").parent().remove();
-        setTimeout(function(){
-            $(".wangpan-tip").remove();
-            $(".new-user-discount-tip").remove();
-            $(".pay-vip-btn-wrap").remove();
-            $(".relative-doc-ad-wrapper").remove();
-        }, loadTime);
         setInterval(function(){
-            $(".view-like-recom-fc").remove();
-            $(".EC_result").remove();
+            // VIP推广
+            $(".join-vip").remove();
+            $(".vip-card-wrap").remove();
+            $(".vip-pop-wrap").remove();
+            $(".fold-page-tip").remove();
+            $(".hx-warp").remove(); // 文档中横幅广告
+            // 右侧栏广告
+            $(".relative-doc-ad-wrapper").remove(); // 相关文档广告
+            $(".relative-course-wrapper").remove(); // 精品课程广告
+            $(".hx-right-wrapper").remove(); // 相关资源广告
+            $(".extension").remove(); // 右下角广告
+            // 底部广告
+            $(".hx-recom-wrapper").remove();
+            $(".hx-bottom-wrapper").remove();
         }, refreshTime);
     }
 
     // 百度图片去广告
     if(location.href.indexOf('image.baidu.com/search/index') > 0){
-        // 品牌广告
-        $("#pnlBeforeContent").remove();
         setInterval(function(){
+            // 品牌广告
+            $("#pnlBeforeContent").remove();
+
             $(".fcImgli").remove();
         }, refreshTime);
     }
     if(location.href.indexOf('image.baidu.com/search/detail') > 0){
-        $(".text-link-ads").remove();
-        $(".rsresult-card").remove();
-        $("#adCard").remove();
+        setInterval(function(){
+            $(".text-link-ads").remove();
+            $(".rsresult-card").remove();
+            $("#adCard").remove();
+        }, refreshTime);
     }
 
     // 伪百度学术重定向
