@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      2.0
+// @version      2.1
 // @icon         http://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验去广告
 // @author       HaoNShi
@@ -109,6 +109,7 @@ jQuery.noConflict();
     // 百度文库去广告
     if(location.href.indexOf('wenku.baidu.com') > 0){
         setInterval(function(){
+            $(".tiger-lossUser-dialog-vip").remove();
             $(".banner-ad").remove();
             $(".ad-box").remove();
             $("#banurl").remove();
@@ -124,10 +125,13 @@ jQuery.noConflict();
             $("#fengchaoad").remove();
             $(".yuedu-recommend-wrap").remove();
             $(".search-aside-adWrap").remove();
+            // 移除百度文库0下载券查询页面的遮盖层
+            $(".coverImg").remove();
         }, refreshTime);
     }
     if(location.href.indexOf('wenku.baidu.com/view') > 0){
         setInterval(function(){
+            $(".add-has-money-pay").remove();
             // VIP推广
             $(".join-vip").remove();
             $(".vip-card-wrap").remove();
@@ -136,12 +140,17 @@ jQuery.noConflict();
             $(".hx-warp").remove(); // 文档中横幅广告
             // 右侧栏广告
             $(".relative-doc-ad-wrapper").remove(); // 相关文档广告
+            $(".ad-onff").remove(); // 相关文档广告
             $(".relative-course-wrapper").remove(); // 精品课程广告
             $(".hx-right-wrapper").remove(); // 相关资源广告
             $(".extension").remove(); // 右下角广告
+            $(".reader-extensin").remove(); // 右下角广告
             // 底部广告
             $(".hx-recom-wrapper").remove();
             $(".hx-bottom-wrapper").remove();
+            $("#relative-videos-wrap").remove();
+            $("#ggbtm").remove();
+            $(".union-ad-bottom").remove();
         }, refreshTime);
     }
 
