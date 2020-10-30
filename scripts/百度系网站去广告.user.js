@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      2.1
+// @version      2.2
 // @icon         http://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验去广告
 // @author       HaoNShi
@@ -39,12 +39,9 @@ jQuery.noConflict();
     if(location.href.indexOf('www.baidu.com/s?') > 0){
         setInterval(function(){
             // 品牌广告
-            $("#content_left").find("div:eq(0)").each(function() {
-                var id = String($(this).attr("id"));
-                if (id == "undefined") {
-                    $(this).remove();
-                }
-            })
+            $("#top-ad").remove();
+            $(".ec-pl-container").remove();
+            // 条目广告
             $("span").each(function() {
                 if ($(this)[0].innerHTML == '广告') {
                     console.log($(this)[0].innerHTML);
@@ -122,6 +119,8 @@ jQuery.noConflict();
     }
     if(location.href.indexOf('wenku.baidu.com/search') > 0){
         setInterval(function(){
+            $("#pzsearchtop").remove(); // 品牌广告
+            $(".topicBox").remove();
             $("#fengchaoad").remove();
             $(".yuedu-recommend-wrap").remove();
             $(".search-aside-adWrap").remove();
@@ -138,9 +137,16 @@ jQuery.noConflict();
             $(".vip-pop-wrap").remove();
             $(".fold-page-tip").remove();
             $(".hx-warp").remove(); // 文档中横幅广告
+            $(".convert-tip").remove();
+            $(".new-user-discount-tip").remove();
+            $(".top-ads-banner-wrap").remove();
+            $(".banner-core-wrap.super-vip").remove();
             // 右侧栏广告
+            $(".qua-box").remove();
+            $(".service-entry").remove();
             $(".relative-doc-ad-wrapper").remove(); // 相关文档广告
             $(".ad-onff").remove(); // 相关文档广告
+            $(".second-ad").remove(); // 相关文档广告
             $(".relative-course-wrapper").remove(); // 精品课程广告
             $(".hx-right-wrapper").remove(); // 相关资源广告
             $(".extension").remove(); // 右下角广告
@@ -149,8 +155,9 @@ jQuery.noConflict();
             $(".hx-recom-wrapper").remove();
             $(".hx-bottom-wrapper").remove();
             $("#relative-videos-wrap").remove();
-            $("#ggbtm").remove();
-            $(".union-ad-bottom").remove();
+            $("#ggbtm").parent().remove();
+            $(".union-ad-bottom").parent().remove();
+            $(".bottom-pop-wrap").remove();
         }, refreshTime);
     }
 
