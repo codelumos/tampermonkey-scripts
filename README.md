@@ -12,7 +12,7 @@ GreasyFork主页：https://greasyfork.org/zh-CN/users/388246
 <ul>
   <li>
   <h4>M站优化</h4>
-  脚本简介：bimibimi去广告以及其他一系列优化</br>
+  脚本简介：bimi动漫去广告以及其他一系列优化</br>
   安装链接：https://greasyfork.org/zh-CN/scripts/391325
   </li>
   <li>
@@ -23,12 +23,12 @@ GreasyFork主页：https://greasyfork.org/zh-CN/users/388246
   <li>
   <h4>百度系网站去广告</h4>
   脚本简介：百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验去广告</br>
-  安装链接：https://greasyfork.org/zh-CN/scripts/393949
+  安装链接：https://greasyfork.org/zh-CN/scripts/394099
   </li>
   <li>
-  <h4>Glgoo学术优化</h4>
-  脚本简介：Glgoo学术搜索去广告和其他一系列优化</br>
-  安装链接：https://greasyfork.org/zh-CN/scripts/393949
+  <h4>快资讯去广告</h4>
+  脚本简介：删除快资讯中的广告</br>
+  安装链接：https://greasyfork.org/zh-CN/scripts/402078
   </li>
 </ul>
 </br>
