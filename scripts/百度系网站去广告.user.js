@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      2.3
+// @version      3.0
 // @icon         http://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验去广告
 // @author       HaoNShi
-// @match        *://www.baidu.com/s*
+// @match        *://www.baidu.com/*
 // @match        *://zhidao.baidu.com/*
 // @match        *://baike.baidu.com/*
 // @match        *://wenku.baidu.com/*
@@ -30,14 +30,10 @@ jQuery.noConflict();
     var refreshTime = 1000;		// 反复加载广告的检测刷新时间
 
     // 百度搜索去广告
-    if(location.href.indexOf('www.baidu.com/s') > 0){
+    if(location.href.indexOf('www.baidu.com') > 0){
         setInterval(function(){
             $("[cmatchid]").remove();
             $("#content_right").remove();
-        }, refreshTime);
-    }
-    if(location.href.indexOf('www.baidu.com/s?') > 0){
-        setInterval(function(){
             // 品牌广告
             $("#top-ad").remove();
             $(".ec-pl-container").remove();
@@ -156,6 +152,7 @@ jQuery.noConflict();
             $(".hx-bottom-wrapper").remove();
             $("#relative-videos-wrap").remove();
             $("#ggbtm").parent().remove();
+            $("#ggbtm-ads").parent().remove();
             $(".union-ad-bottom").parent().remove();
             $(".bottom-pop-wrap").remove();
         }, refreshTime);
@@ -269,8 +266,8 @@ jQuery.noConflict();
     if(location.href.indexOf('map.baidu.com/search') > 0){
         // 品牌广告
         setInterval(function(){
-            $(".damoce-search-item.damoce-search-item-nopoi").remove();
-        }, loadTime);
+            $(".damoce-search-item").remove();
+        }, refreshTime);
     }
 
     // 百度经验去广告
