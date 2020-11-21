@@ -26,9 +26,19 @@ GreasyFork主页：https://greasyfork.org/zh-CN/users/388246
   安装链接：https://greasyfork.org/zh-CN/scripts/394099
   </li>
   <li>
+  <h4>Glgoo学术优化(已删除)</h4>
+  脚本简介：Glgoo学术搜索去广告和其他一系列优化</br>
+  安装链接：https://greasyfork.org/zh-CN/scripts/394471
+  </li>
+  <li>
   <h4>快资讯去广告</h4>
   脚本简介：删除快资讯中的广告</br>
   安装链接：https://greasyfork.org/zh-CN/scripts/402078
+  </li>
+  <li>
+  <h4>问卷星允许选中</h4>
+  脚本简介：问卷星允许选中和右键</br>
+  安装链接：https://greasyfork.org/zh-CN/scripts/416535
   </li>
 </ul>
 </br>
@@ -39,5 +49,6 @@ GreasyFork主页：https://greasyfork.org/zh-CN/users/388246
 </ul>
 </br>
 
-<h2>友情捐助</h2>
+<h2>支持打赏</h2>
+觉得好用就支持一下开发者吧！您的打赏是我维护更新的最大动力！
 <img src="https://i.loli.net/2020/01/09/5aoFgD1qVWnrOHp.png" alt="二维码" width="600">
