@@ -1,23 +1,13 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      3.0
-// @icon         http://www.baidu.com/favicon.ico
+// @version      3.1
+// @icon         https://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验去广告
 // @author       HaoNShi
-// @match        *://www.baidu.com/*
-// @match        *://zhidao.baidu.com/*
-// @match        *://baike.baidu.com/*
-// @match        *://wenku.baidu.com/*
-// @match        *://image.baidu.com/search/*
-// @match        *://xueshu.baidu.com/s*
-// @match        *://v.baidu.com/*
-// @match        *://video.baidu.com/*
-// @match        *://tieba.baidu.com/*
-// @match        *://map.baidu.com/*
-// @match        *://jingyan.baidu.com/*
+// @match        *://*.baidu.com/*
 // @grant        none
-// @require      https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js
+// @require      https://cdn.bootcss.com/jquery/3.5.1/jquery.min.js
 // ==/UserScript==
 
 jQuery.noConflict();
@@ -120,6 +110,8 @@ jQuery.noConflict();
             $("#fengchaoad").remove();
             $(".yuedu-recommend-wrap").remove();
             $(".search-aside-adWrap").remove();
+            $(".search-knowledge").parent().remove();
+            $(".new-vip-card-position").remove();
             // 移除百度文库0下载券查询页面的遮盖层
             $(".coverImg").remove();
         }, refreshTime);
@@ -131,6 +123,7 @@ jQuery.noConflict();
             $(".join-vip").remove();
             $(".vip-card-wrap").remove();
             $(".vip-pop-wrap").remove();
+            $(".vip-activity-wrap").remove();
             $(".fold-page-tip").remove();
             $(".hx-warp").remove(); // 文档中横幅广告
             $(".convert-tip").remove();
