@@ -40,6 +40,11 @@ GreasyFork主页：https://greasyfork.org/zh-CN/users/388246
   脚本简介：问卷星允许选中和右键</br>
   安装链接：https://greasyfork.org/zh-CN/scripts/416535
   </li>
+  <li>
+  <h4>360搜索去广告</h4>
+  脚本简介：360搜索、360资讯、360问答、360影视、360图片、360良医、360地图、360百科、360国学、360文库、360音乐、360翻译去广告</br>
+  安装链接：https://greasyfork.org/zh-CN/scripts/416595
+  </li>
 </ul>
 </br>
 
