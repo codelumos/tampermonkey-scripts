@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         360搜索去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      0.1
+// @version      0.2
 // @icon         https://www.so.com/favicon.ico
 // @description  360搜索、360资讯、360问答、360影视、360图片、360良医、360地图、360百科、360国学、360文库、360音乐、360翻译去广告
 // @author       HaoNShi
@@ -20,11 +20,18 @@
     if(location.href.indexOf('www.so.com') > 0){
         setInterval(function(){
             $(".lawnfooter-image__panel").remove();// 首页下方横幅广告
-            $("#side").remove(); // 侧边栏
+            // 侧边栏
+            $("#so_bd-ad").remove();
+            // $("#soSafe").attr("class", "open");
+            $("#so_ob").remove();
+            $("#lm-rightbottom").remove();
+            $(".res-mediav-right").remove();
             // 条目广告
             $(".res-mediav").remove();
             $(".m-spread-middle").remove();
             $("#news-sdk-sad").remove();
+            $(".mh-ad").parent().remove();
+            $("#mohe-360pic_new_ext--strong").remove();
         }, refreshTime);
     }
 
@@ -33,6 +40,7 @@
         setInterval(function(){
             $("#side").remove(); // 侧边栏
             $(".info-flow").remove(); // 智能推荐
+            $(".js-multi-i-item").remove(); // 条目广告
         }, refreshTime);
     }
 
@@ -44,6 +52,7 @@
             // 条目广告
             $("#e_idea_wenda_leftBox").remove();
             $(".js-busi-item").remove();
+            $(".js-ajax-busi-item").remove();
         }, refreshTime);
     }
 
