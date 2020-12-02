@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         快资讯去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.0
+// @version      1.0.1
 // @icon         https://p5.ssl.qhimg.com/t013ed96d9c4cf74064.png
 // @description  删除快资讯中的广告
 // @author       HaoNShi
@@ -9,13 +9,12 @@
 // @grant        none
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
-    // Your code here...
-    var refreshTime = 1000;		// 反复加载广告的检测刷新时间
+    const refreshTime = 1000;		// 反复加载广告的检测刷新时间
 
-    setInterval(function(){
+    setInterval(function () {
         $("#as_shop_gg").remove(); // 主页购物广告
         $(".popupgg").remove(); // 详情页右下角广告
         $(".top-part").remove(); // 顶栏广告

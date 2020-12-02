@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         问卷星允许选中
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      0.1
+// @version      0.1.1
 // @icon         https://www.wjx.cn/favicon.ico
 // @description  问卷星允许选中和右键
 // @author       HaoNShi
@@ -9,16 +9,15 @@
 // @grant        none
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
-    // Your code here...
     // 允许右键
-    document.oncontextmenu = function(e) {
+    document.oncontextmenu = function () {
         return true;
     };
     // 允许选中
-    document.onselectstart = function(e) {
+    document.onselectstart = function () {
         return true;
     };
 })();

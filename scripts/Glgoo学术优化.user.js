@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Glgoo学术优化
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      0.2
+// @version      0.2.1
 // @icon         https://xs.xiayige.org/favicon.ico
 // @description  Glgoo学术搜索去广告和其他一系列优化
 // @author       HaoNShi
@@ -13,16 +13,15 @@
 // @require      https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
-    // Your code here...
     // 去广告
     $(".adsbygoogle").remove();
     $("#gs_hdr_act").remove();
-    
+
     // 搜索栏增加logo
-    $("#gs_hdr_lgo").append('<img id="logo" src="//gstatic.kkssl.com/logo.png" width="140"></img>');
-    $("#logo").css({"margin":"15px 0px 0px 15px"});
+    $("#gs_hdr_lgo").append('<img id="logo" src="//gstatic.kkssl.com/logo.png" width="140" alt="Glgoo学术"/>');
+    $("#logo").css({"margin": "15px 0px 0px 15px"});
 
 })();

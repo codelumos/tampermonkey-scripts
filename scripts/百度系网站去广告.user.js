@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      3.2
+// @version      3.2.1
 // @icon         https://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验、百度翻译去广告
 // @author       HaoNShi
@@ -14,8 +14,7 @@ jQuery.noConflict();
 (function ($) {
     'use strict';
 
-    // Your code here...
-    var refreshTime = 5000;		// 检测广告的刷新时间
+    const refreshTime = 1000;		// 检测广告的刷新时间
 
     // 百度搜索去广告
     if (location.href.indexOf('www.baidu.com') > 0) {
@@ -28,7 +27,7 @@ jQuery.noConflict();
             $(".ec-pl-container").remove();
             // 条目广告
             $("span").each(function () {
-                if ($(this)[0].innerHTML == '广告') {
+                if ($(this)[0].innerHTML === '广告') {
                     $(this).parent().parent().remove();
                 }
             })
@@ -224,8 +223,8 @@ jQuery.noConflict();
     if (location.href.indexOf('www.baidu.com/sf/vsearch') > 0) {
         // 品牌广告
         $("#s_tab").next().next().each(function () {
-            var id = String($(this).attr("id"));
-            if (id == "undefined") {
+            let id = String($(this).attr("id"));
+            if (id === "undefined") {
                 $(this).remove();
             }
         })
@@ -242,8 +241,8 @@ jQuery.noConflict();
     }
     if (location.href.indexOf('tieba.baidu.com/p') > 0) {
         $("#j_p_postlist").find("div").each(function () {
-            var isAd = String($(this).attr("ad-dom-img"));
-            if (isAd == "true") {
+            let isAd = String($(this).attr("ad-dom-img"));
+            if (isAd === "true") {
                 $(this).remove();
             }
         })
@@ -268,7 +267,6 @@ jQuery.noConflict();
         $("#bottom-ads-container").remove();
         $(".magzine-list").remove();
         $("#wgt-left-promo").remove();
-        $("#task-panel-wrap").remove();
         // 侧边栏广告
         $(".right-fixed-related-wrap").remove();
         $("#task-panel-wrap").remove();
