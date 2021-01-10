@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      3.2.1
+// @version      3.3
 // @icon         https://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验、百度翻译去广告
 // @author       HaoNShi
@@ -10,11 +10,12 @@
 // @require      https://cdn.bootcss.com/jquery/3.5.1/jquery.min.js
 // ==/UserScript==
 
-jQuery.noConflict();
-(function ($) {
+var dom = {};
+dom.query = jQuery.noConflict(true);
+dom.query(document).ready(function ($) {
     'use strict';
 
-    const refreshTime = 1000;		// 检测广告的刷新时间
+    const refreshTime = 1000;   // 检测广告的刷新时间
 
     // 百度搜索去广告
     if (location.href.indexOf('www.baidu.com') > 0) {
@@ -115,6 +116,8 @@ jQuery.noConflict();
     }
     if (location.href.indexOf('wenku.baidu.com/view') > 0) {
         setInterval(function () {
+            // 全页面广告
+            $(".pager-container").remove();
             $(".add-has-money-pay").remove();
             // VIP推广
             $(".join-vip").remove();
@@ -127,7 +130,10 @@ jQuery.noConflict();
             $(".new-user-discount-tip").remove();
             $(".top-ads-banner-wrap").remove();
             $(".banner-core-wrap.super-vip").remove();
+            $(".vip-layer-inner").remove();
+            $(".vip-activity-wrap-new").remove();
             // 右侧栏广告
+            $(".fufei-activity-bar").remove();
             $(".qua-box").remove();
             $(".service-entry").remove();
             $(".relative-doc-ad-wrapper").remove(); // 相关文档广告
@@ -281,4 +287,4 @@ jQuery.noConflict();
         $(".spread-wrap").remove();
     }
 
-})(jQuery);
+});
