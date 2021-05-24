@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         M站优化
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.6
+// @version      1.6.1
 // @icon         http://www.bimiacg.com/favicon.ico
 // @description  bimi动漫去广告以及其他一系列优化
 // @author       HaoNShi
@@ -13,7 +13,7 @@
     'use strict';
 
     // 去广告
-    setTimeout(function () {
+    setInterval(function () {
         $("#HMRichBox").remove(); // 右下角广告
         $("#HMcoupletDivleft").remove(); // 右下角广告
         $("#HMcoupletDivright").remove(); // 右下角广告

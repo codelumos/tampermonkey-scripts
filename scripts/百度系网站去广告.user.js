@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      3.3
+// @version      3.3.1
 // @icon         https://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验、百度翻译去广告
 // @author       HaoNShi
@@ -119,6 +119,7 @@ dom.query(document).ready(function ($) {
             // 全页面广告
             $(".pager-container").remove();
             $(".add-has-money-pay").remove();
+            $(".experience-card-wrap").remove();
             // VIP推广
             $(".join-vip").remove();
             $(".vip-card-wrap").remove();
@@ -132,6 +133,8 @@ dom.query(document).ready(function ($) {
             $(".banner-core-wrap.super-vip").remove();
             $(".vip-layer-inner").remove();
             $(".vip-activity-wrap-new").remove();
+            $(".vip-pay-pop-v2-wrap").remove();
+            $(".zhenxuan-guide").remove(); // 甄选
             // 右侧栏广告
             $(".fufei-activity-bar").remove();
             $(".qua-box").remove();
@@ -251,7 +254,8 @@ dom.query(document).ready(function ($) {
             if (isAd === "true") {
                 $(this).remove();
             }
-        })
+        });
+        $(".tb_poster_placeholder").remove(); // 回复会员广告
     }
 
     // 百度地图去广告
