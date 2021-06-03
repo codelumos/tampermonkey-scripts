@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         M站优化
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      1.6.1
-// @icon         http://www.bimiacg.com/favicon.ico
+// @version      1.7
+// @icon         http://www.bimiacg.net/favicon.ico
 // @description  bimi动漫去广告以及其他一系列优化
 // @author       HaoNShi
-// @match        *://www.bimiacg.com/*
+// @match        *://www.bimiacg.net/*
+// @match        *://bimiacg.net/*
 // @grant        none
 // ==/UserScript==
 
