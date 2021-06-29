@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
-// @version      3.3.1
+// @version      3.4
 // @icon         https://www.baidu.com/favicon.ico
 // @description  百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验、百度翻译去广告
 // @author       HaoNShi
 // @match        *://*.baidu.com/*
 // @grant        none
-// @require      https://cdn.bootcss.com/jquery/3.5.1/jquery.min.js
+// @require      https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js
 // ==/UserScript==
 
 var dom = {};
@@ -15,21 +15,25 @@ dom.query = jQuery.noConflict(true);
 dom.query(document).ready(function ($) {
     'use strict';
 
-    const refreshTime = 1000;   // 检测广告的刷新时间
+    const refreshTime = 1000; // 检测广告的刷新时间
 
     // 百度搜索去广告
     if (location.href.indexOf('www.baidu.com') > 0) {
         setInterval(function () {
-            $(".ad-icon").parent().parent().parent().remove();
-            $("[cmatchid]").remove();
             $("#content_right").remove();
             // 品牌广告
             $("#top-ad").remove();
             $(".ec-pl-container").remove();
             // 条目广告
-            $("span").each(function () {
+            $("#content_left > div").each(function () {
+                if ($(this).attr('id') === undefined) {
+                    $(this).remove();
+                }
+            })
+            // 延迟加载条目广告
+            $("a").each(function () {
                 if ($(this)[0].innerHTML === '广告') {
-                    $(this).parent().parent().remove();
+                    $(this).parents(".result").remove();
                 }
             })
         }, refreshTime);
