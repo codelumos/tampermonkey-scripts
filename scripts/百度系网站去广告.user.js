@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    http://tampermonkey.net/
-// @version      4.0
+// @version      4.1
 // @icon         https://www.baidu.com/favicon.ico
 // @description  移除百度系网站中的广告，包括：百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验、百度翻译等
 // @author       HaoNShi
@@ -16,21 +16,21 @@ dom.query = jQuery.noConflict(true);
 dom.query(document).ready(function ($) {
     'use strict';
 
-    const refreshTime = 1000; // 检测广告周期
+    const cycle = 1000; // 广告检测周期
 
     // 百度搜索
     if (location.href.indexOf('www.baidu.com') > 0) {
+        // 右侧栏
+        $("#content_right").remove();
+        // 品牌广告
+        $("#top-ad").remove();
+        $(".ec-pl-container").remove();
+        $("#content_left > div").each(function () {
+            if ($(this).attr('id') === undefined && $('> style', this).attr('id') !== undefined) {
+                $(this).remove();
+            }
+        })
         setInterval(function () {
-            // 右侧栏
-            $("#content_right").remove();
-            // 品牌广告
-            $("#top-ad").remove();
-            $(".ec-pl-container").remove();
-            $("#content_left > div").each(function () {
-                if ($(this).attr('id') === undefined && $('> style', this).attr('id') !== undefined) {
-                    $(this).remove();
-                }
-            })
             // 搜索结果条目广告
             $("#content_left > div").each(function () {
                 if ($(this).attr('id') === undefined && $('> div', this).attr('data-placeid') !== undefined) {
@@ -43,7 +43,7 @@ dom.query(document).ready(function ($) {
                     $(this).parents(".result").remove();
                 }
             })
-        }, refreshTime);
+        }, cycle);
     }
 
     // 百度知道
@@ -52,7 +52,7 @@ dom.query(document).ready(function ($) {
             $(".shop-entrance").remove();
             $(".activity-entry").remove();
             $(".task-list-button").remove();
-        }, refreshTime);
+        }, cycle);
     }
     if (location.href.indexOf('zhidao.baidu.com/search') > 0) {
         setInterval(function () {
@@ -62,7 +62,7 @@ dom.query(document).ready(function ($) {
             // 品牌广告
             $(".leftup").remove();
             $(".wgt-iknow-special-business").remove();
-        }, refreshTime);
+        }, cycle);
     }
     if (location.href.indexOf('zhidao.baidu.com/question') > 0) {
         setInterval(function () {
@@ -76,7 +76,7 @@ dom.query(document).ready(function ($) {
             $(".wgt-bottom-union").remove();
             $(".ec-pc_mat_coeus__related_link_text-content").remove();
             $(".businessvip-wrapper").remove();
-        }, refreshTime);
+        }, cycle);
     }
 
     // 百度百科
@@ -84,7 +84,7 @@ dom.query(document).ready(function ($) {
         setInterval(function () {
             $("#navbarAdNew").remove();
             $(".userbar_mall").remove();
-        }, refreshTime);
+        }, cycle);
     }
     if (location.href.indexOf('baike.baidu.com/item') > 0) {
         setInterval(function () {
@@ -97,7 +97,7 @@ dom.query(document).ready(function ($) {
             $(".lemmaWgt-promotion-slide").remove();
             $("#side_box_unionAd").remove();
             $(".after-content").remove(); // 搜索发现
-        }, refreshTime);
+        }, cycle);
     }
 
     // 百度文库
@@ -112,7 +112,7 @@ dom.query(document).ready(function ($) {
             $(".zsj-topbar").remove();
             $(".lastcell-dialog").remove();
             $(".zsj-toppos").remove();
-        }, refreshTime);
+        }, cycle);
     }
     if (location.href.indexOf('wenku.baidu.com/search') > 0) {
         setInterval(function () {
@@ -127,7 +127,7 @@ dom.query(document).ready(function ($) {
             $(".vip-guide-mask").remove();
             // 移除百度文库0下载券查询页面的遮盖层
             $(".coverImg").remove();
-        }, refreshTime);
+        }, cycle);
     }
     if (location.href.indexOf('wenku.baidu.com/view') > 0) {
         setInterval(function () {
@@ -170,7 +170,7 @@ dom.query(document).ready(function ($) {
             $("#ggbtm-ads").parent().remove();
             $(".union-ad-bottom").parent().remove();
             $(".bottom-pop-wrap").remove();
-        }, refreshTime);
+        }, cycle);
     }
 
     // 百度图片
@@ -180,14 +180,14 @@ dom.query(document).ready(function ($) {
             $("#pnlBeforeContent").remove();
             $(".adMask").remove();
             $(".newfcImgli").remove();
-        }, refreshTime);
+        }, cycle);
     }
     if (location.href.indexOf('image.baidu.com/search/detail') > 0) {
         setInterval(function () {
             $(".text-link-ads").remove();
             $(".rsresult-card").remove();
             $("#adCard").remove();
-        }, refreshTime);
+        }, cycle);
     }
 
     // 百度视频
@@ -223,7 +223,7 @@ dom.query(document).ready(function ($) {
             $("div[id*='TabAd']").remove();
             // 底栏广告
             $("#topic-wrap-v2").remove();
-        }, refreshTime);
+        }, cycle);
     }
     if (location.href.indexOf('video.baidu.com/v') > 0 || location.href.indexOf('v.baidu.com/v') > 0) {
         // 品牌广告
@@ -238,7 +238,7 @@ dom.query(document).ready(function ($) {
             $("#searchResultAdOne").remove();
             $("#searchHotShortSeven").remove();
             $("#searchHotShortSevenTwo").remove();
-        }, refreshTime);
+        }, cycle);
     }
     if (location.href.indexOf('www.baidu.com/sf/vsearch') > 0) {
         // 品牌广告
@@ -257,7 +257,7 @@ dom.query(document).ready(function ($) {
     if (location.href.indexOf('tieba.baidu.com/f?') > 0) {
         setInterval(function () {
             $("span:contains('广告')").parent().parent().parent().parent().parent().remove();
-        }, refreshTime);
+        }, cycle);
     }
     if (location.href.indexOf('tieba.baidu.com/p') > 0) {
         $("#j_p_postlist").find("div").each(function () {
@@ -275,7 +275,7 @@ dom.query(document).ready(function ($) {
         setInterval(function () {
             $("#activity-banner-panel").remove();
             $(".damoce-search-item").remove();
-        }, refreshTime);
+        }, cycle);
     }
 
     // 百度经验
@@ -302,6 +302,7 @@ dom.query(document).ready(function ($) {
     if (location.href.indexOf('fanyi.baidu.com') > 0) {
         $("#sideAdContainer").remove();
         $(".spread-wrap").remove();
+        $("#sideBannerContainer").remove();
     }
 
 });
