@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         360搜索去广告
-// @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
+// @namespace    http://tampermonkey.net/
 // @version      1.0
 // @icon         https://www.so.com/favicon.ico
 // @description  360搜索、360资讯、360问答、360影视、360图片、360良医、360地图、360百科、360国学、360文库、360音乐、360翻译去广告
 // @author       HaoNShi
+// @homepageURL  https://github.com/HaoNShi/tampermonkey-scripts
 // @match        *://*.so.com/*
 // @match        *://video.360kan.com/*
 // @grant        none

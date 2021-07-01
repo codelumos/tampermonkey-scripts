@@ -8,6 +8,12 @@ tampermonkey-scripts中包含多个有关改进网页浏览体验的脚本。
 
 GreasyFork主页：https://greasyfork.org/zh-CN/users/388246
 
+## 项目结构
+
+- deprecated：已删除的脚本
+
+- scripts：维护中的脚本
+
 ## 脚本列表
 
 - M站优化
@@ -29,14 +35,6 @@ GreasyFork主页：https://greasyfork.org/zh-CN/users/388246
   脚本简介：百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验、百度翻译去广告
 
   安装链接：https://greasyfork.org/zh-CN/scripts/394099
-
-
-- Glgoo学术优化(已删除)
-
-  脚本简介：Glgoo学术搜索去广告和其他一系列优化
-
-  安装链接：https://greasyfork.org/zh-CN/scripts/394471
-
 
 - 快资讯去广告
 
@@ -61,4 +59,3 @@ GreasyFork主页：https://greasyfork.org/zh-CN/users/388246
 ## 联系方式
 
 - E-Mail：haonshi@qq.com
-

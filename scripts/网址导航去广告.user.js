@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         网址导航去广告
-// @namespace    https://github.com/HaoNShi/Tampermonkey_Scripts
+// @namespace    http://tampermonkey.net/
 // @version      2.0
 // @icon         http://www.hao123.com/favicon.ico
 // @description  hao123、2345网址导航、360导航、搜狗网址导航、QQ导航、UC导航、毒霸网址大全去广告
 // @author       HaoNShi
+// @homepageURL  https://github.com/HaoNShi/tampermonkey-scripts
 // @match        *://www.hao123.com/*
 // @match        *://www.2345.com/*
 // @match        *://hao.360.com/*
