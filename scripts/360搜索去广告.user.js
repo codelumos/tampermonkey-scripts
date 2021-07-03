@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         360搜索去广告
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.0.1
 // @icon         https://www.so.com/favicon.ico
 // @description  360搜索、360资讯、360问答、360影视、360图片、360良医、360地图、360百科、360国学、360文库、360音乐、360翻译去广告
 // @author       HaoNShi
@@ -15,9 +15,9 @@
     'use strict';
 
     // Your code here...
-    var refreshTime = 500;		// 检测广告的刷新时间
+    const cycle = 500; // 广告检测周期
 
-    // 360搜索去广告
+    // 360搜索
     if (location.href.indexOf('www.so.com') > 0) {
         setInterval(function () {
             $(".lawnfooter-image__panel").remove();// 首页下方横幅广告
@@ -34,19 +34,19 @@
             $("#news-sdk-sad").remove();
             $(".mh-ad").parent().remove();
             $("#mohe-360pic_new_ext--strong").remove();
-        }, refreshTime);
+        }, cycle);
     }
 
-    // 360资讯去广告
+    // 360资讯
     if (location.href.indexOf('news.so.com') > 0) {
         setInterval(function () {
             $("#side").remove(); // 侧边栏
             $(".info-flow").remove(); // 智能推荐
             $(".js-multi-i-item").remove(); // 条目广告
-        }, refreshTime);
+        }, cycle);
     }
 
-    // 360问答去广告
+    // 360问答
     if (location.href.indexOf('wenda.so.com') > 0) {
         setInterval(function () {
             $(".aside").remove(); // 侧边栏
@@ -63,49 +63,49 @@
             $("#detail-guess-wrap").remove();
             // 今日热点
             $(".js-mod-flow").remove();
-        }, refreshTime);
+        }, cycle);
     }
 
-    // 360影视去广告
+    // 360影视
     if (location.href.indexOf('video.360kan.com') > 0) {
         setInterval(function () {
             $(".p-searchad-wrap").remove(); // 文字广告
             // 条目广告
             $(".adbig").remove();
             $("[data-adclicklog]").remove();
-        }, refreshTime);
+        }, cycle);
     }
 
-    // 360图片去广告
+    // 360图片
     if (location.href.indexOf('image.so.com') > 0) {
         setInterval(function () {
             $("[data-id*='cm_extended_init']").remove(); // 条目广告
             $(".related_query").parent().remove(); // 相关搜索
-        }, refreshTime);
+        }, cycle);
     }
 
-    // 360良医去广告
+    // 360良医
     if (location.href.indexOf('ly.so.com') > 0) {
         setInterval(function () {
             $("#so_ob").remove(); // 侧边栏（保留提示）
             $("#news-card").remove(); // 热门资讯推荐
-        }, refreshTime);
+        }, cycle);
     }
 
-    // 360地图去广告
+    // 360地图
     if (location.href.indexOf('ditu.so.com') > 0) {
         setInterval(function () {
             $("[data-e_href]").remove(); // 条目广告
-        }, refreshTime);
+        }, cycle);
     }
 
-    // 360百科去广告
+    // 360百科
     if (location.href.indexOf('baike.so.com/search') > 0) {
         setInterval(function () {
             $(".aside").remove(); // 侧边栏
             $("#e_idea_wenda_leftBox").remove(); // 条目广告
             $("div[id*='mvdiv']").remove(); // 横幅广告
-        }, refreshTime);
+        }, cycle);
     }
     if (location.href.indexOf('baike.so.com/doc') > 0) {
         setInterval(function () {
@@ -121,10 +121,10 @@
             $("#J-mod-interested-possible").remove(); // 搜索发现
             $(".entry-plus").remove(); // 热点资讯
             $("#js-doc-recommand").remove(); // 为您推荐广告
-        }, refreshTime);
+        }, cycle);
     }
 
-    // 360国学去广告
+    // 360国学
     if (location.href.indexOf('guoxue.baike.so.com') > 0) {
         setInterval(function () {
             $(".right").remove(); // 侧边栏
@@ -132,15 +132,15 @@
             $("#js-doc-recommand").remove(); // 为您推荐广告
             $(".lm-bottom-container").remove(); // 横幅广告
             $("#J-entry-newsfeed-bottom").remove(); // 资讯
-        }, refreshTime);
+        }, cycle);
     }
 
-    // 360文库去广告
+    // 360文库
     if (location.href.indexOf('wenku.so.com/s') > 0) {
         setInterval(function () {
             $(".rt-side").remove(); // 侧边栏
             $("#e_idea_wenda_leftBox").remove(); // 条目广告
-        }, refreshTime);
+        }, cycle);
     }
     if (location.href.indexOf('wenku.so.com/d') > 0) {
         setInterval(function () {
@@ -153,21 +153,21 @@
             // 侧边栏
             $("#e_idea_wk_detail_hot").remove(); // 相关文档推荐广告
             $(".side-mod").remove(); // 今日热点广告
-        }, refreshTime);
+        }, cycle);
     }
 
-    // 360音乐去广告
+    // 360音乐
     if (location.href.indexOf('music.so.com') > 0) {
         setInterval(function () {
             $("#right-top-ad").remove(); // 侧边栏
             $(".newsfeed").remove(); // 相关推荐广告
-        }, refreshTime);
+        }, cycle);
     }
 
-    // 360翻译去广告
+    // 360翻译
     if (location.href.indexOf('fanyi.so.com') > 0) {
         setInterval(function () {
             $("#card_container").remove(); // 热点推荐广告
-        }, refreshTime);
+        }, cycle);
     }
 })();

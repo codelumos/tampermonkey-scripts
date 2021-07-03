@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         M站优化
 // @namespace    http://tampermonkey.net/
-// @version      1.7
+// @version      1.7.1
 // @icon         http://www.bimiacg.net/favicon.ico
 // @description  bimi动漫去广告以及其他一系列优化
 // @author       HaoNShi

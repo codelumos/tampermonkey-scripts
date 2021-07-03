@@ -13,7 +13,7 @@
 (function () {
     'use strict';
 
-    const refreshTime = 1000;		// 反复加载广告的检测刷新时间
+    const cycle = 1000; // 广告检测周期
 
     setInterval(function () {
         $("#as_shop_gg").remove(); // 主页购物广告
@@ -25,5 +25,5 @@
         $(".guessgg").remove(); // 详情页购物广告
         $(".bkg-block").remove(); // 背景广告
         $(".bkg-close").remove(); // 背景广告
-    }, refreshTime);
+    }, cycle);
 })();

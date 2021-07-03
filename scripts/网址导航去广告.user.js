@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         网址导航去广告
 // @namespace    http://tampermonkey.net/
-// @version      2.0
+// @version      2.0.1
 // @icon         http://www.hao123.com/favicon.ico
 // @description  hao123、2345网址导航、360导航、搜狗网址导航、QQ导航、UC导航、毒霸网址大全去广告
 // @author       HaoNShi
@@ -23,9 +23,9 @@ jQuery.noConflict();
 (function ($) {
     'use strict';
 
-    const refreshTime = 500;		// 广告检测时间周期
+    const cycle = 500; // 广告检测周期
 
-    // hao123去广告
+    // hao123
     if (location.href.indexOf('hao123.com') > 0) {
         setInterval(function () {
             $("#topbeWrapper").remove(); // 顶栏广告
@@ -34,10 +34,10 @@ jQuery.noConflict();
             $("#box-famous-resource").remove(); // 横幅广告
             $(".bottom-banner-link-wrapper").remove(); // 底部广告
             $(".wm").remove(); // 推荐栏广告
-        }, refreshTime);
+        }, cycle);
     }
 
-    // 2345网址导航去广告
+    // 2345网址导航
     if (location.href.indexOf('2345.com') > 0) {
         setInterval(function () {
             $(".tip_stopXP").remove(); // 顶部浏览器推广广告
@@ -53,14 +53,10 @@ jQuery.noConflict();
             $("#J_hot_event").remove(); // 右侧轮播广告
             $("#rightXieCheng").remove(); // 右侧悬浮广告
             $("#J_right_bottom_ad").remove(); // 右下角广告
-        }, refreshTime);
+        }, cycle);
     }
 
-    // 重定向新版360导航
-    if (location.href.indexOf('hao.360') > 0 && location.href.indexOf('2020') <= 0) {
-        window.location.replace("https://hao.360.com/2020.html");
-    }
-    // 360导航去广告
+    // 360导航
     if (location.href.indexOf('hao.360') > 0) {
         setInterval(function () {
             $("#corner-flash").remove(); // 右上角广告
@@ -84,11 +80,11 @@ jQuery.noConflict();
 
             $(".adMark").parents(".cube-mod").remove(); // 魔方广告
             $(".ads-img").parents(".right-content").remove(); // 魔方内文字条目广告
-        }, refreshTime);
+        }, cycle);
 
     }
 
-    // 搜狗网址导航、QQ导航（上网导航）去广告
+    // 搜狗网址导航、QQ导航（上网导航）
     if (location.href.indexOf('123.sogou.com') > 0 || location.href.indexOf('hao.qq.com') > 0 || location.href.indexOf('daohang.qq.com') > 0) {
         setInterval(function () {
             $("#sdtom").parent().remove(); // 悬浮广告
@@ -107,10 +103,10 @@ jQuery.noConflict();
             $("div[pbflag='coolsitefeed_ad']").remove(); // 焦点条目广告
             $("div[pbflag='bt_newsb_ad']").remove(); // 信息流条目广告
             $("#wrap").remove(); // 右下角广告
-        }, refreshTime);
+        }, cycle);
     }
 
-    // UC导航去广告
+    // UC导航
     if (location.href.indexOf('uc123.com') > 0) {
         setInterval(function () {
             $(".header-push-container").remove(); // 顶栏广告
@@ -120,10 +116,10 @@ jQuery.noConflict();
             $(".cool").remove(); // 左侧空位
             $("#J_shopping").remove(); // 阿里妈妈推广
             $("#J_shopping").remove(); // 阿里妈妈推广
-        }, refreshTime);
+        }, cycle);
     }
 
-    // 毒霸网址大全去广告
+    // 毒霸网址大全
     if (location.href.indexOf('duba.com') > 0 || location.href.indexOf('newduba.cn') > 0) {
         setInterval(function () {
             $("#top_ad_tmall_ul").parent().remove(); // 顶部广告
@@ -156,7 +152,7 @@ jQuery.noConflict();
             $(".newslist > div").remove(); // 信息流条目广告
             // 精简版
             $(".mediavAd").remove(); // 信息流条目广告
-        }, refreshTime);
+        }, cycle);
     }
 
 })(jQuery);

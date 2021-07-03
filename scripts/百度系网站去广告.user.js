@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    http://tampermonkey.net/
-// @version      4.1
+// @version      4.2
 // @icon         https://www.baidu.com/favicon.ico
-// @description  移除百度系网站中的广告，包括：百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验、百度翻译等
+// @description  移除百度系网站中的广告，包括：百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验、百度翻译、百度网盘等
 // @author       HaoNShi
 // @homepageURL  https://github.com/HaoNShi/tampermonkey-scripts
 // @match        *://*.baidu.com/*
@@ -11,7 +11,7 @@
 // @require      https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js
 // ==/UserScript==
 
-var dom = {};
+let dom = {};
 dom.query = jQuery.noConflict(true);
 dom.query(document).ready(function ($) {
     'use strict';
@@ -55,13 +55,14 @@ dom.query(document).ready(function ($) {
         }, cycle);
     }
     if (location.href.indexOf('zhidao.baidu.com/search') > 0) {
+        // 品牌广告
+        $(".leftup").remove();
+        $(".wgt-iknow-special-business").remove();
+        // 右侧栏
+        $(".aside.fixheight").remove();
         setInterval(function () {
-            $(".bannerdown").remove();
-            $(".aside.fixheight").remove();
+            $(".bannerdown").remove(); // 结果条目广告
             $(".wgt-bottom-ask").remove();
-            // 品牌广告
-            $(".leftup").remove();
-            $(".wgt-iknow-special-business").remove();
         }, cycle);
     }
     if (location.href.indexOf('zhidao.baidu.com/question') > 0) {
@@ -115,19 +116,17 @@ dom.query(document).ready(function ($) {
         }, cycle);
     }
     if (location.href.indexOf('wenku.baidu.com/search') > 0) {
-        setInterval(function () {
-            $(".aside").remove(); // 右侧栏
-            $("#pzsearchtop").remove(); // 品牌广告
-            $(".topicBox").remove();
-            $("#fengchaoad").remove();
-            $(".yuedu-recommend-wrap").remove();
-            $(".search-aside-adWrap").remove();
-            $(".search-knowledge").parent().remove();
-            $(".new-vip-card-position").remove();
-            $(".vip-guide-mask").remove();
-            // 移除百度文库0下载券查询页面的遮盖层
-            $(".coverImg").remove();
-        }, cycle);
+        $(".aside").remove(); // 右侧栏
+        $("#pzsearchtop").remove(); // 品牌广告
+        $(".topicBox").remove();
+        $("#fengchaoad").remove();
+        $(".yuedu-recommend-wrap").remove();
+        $(".search-aside-adWrap").remove();
+        $(".search-knowledge").parent().remove();
+        $(".new-vip-card-position").remove();
+        $(".vip-guide-mask").remove();
+        // 移除百度文库0下载券查询页面的遮盖层
+        $(".coverImg").remove();
     }
     if (location.href.indexOf('wenku.baidu.com/view') > 0) {
         setInterval(function () {
@@ -175,10 +174,10 @@ dom.query(document).ready(function ($) {
 
     // 百度图片
     if (location.href.indexOf('image.baidu.com/search/index') > 0) {
+        // 品牌广告
+        $("#pnlBeforeContent").remove();
+        $(".adMask").remove();
         setInterval(function () {
-            // 品牌广告
-            $("#pnlBeforeContent").remove();
-            $(".adMask").remove();
             $(".newfcImgli").remove();
         }, cycle);
     }
@@ -256,7 +255,8 @@ dom.query(document).ready(function ($) {
     }
     if (location.href.indexOf('tieba.baidu.com/f?') > 0) {
         setInterval(function () {
-            $("span:contains('广告')").parent().parent().parent().parent().parent().remove();
+            $(".fengchao-wrap-feed").remove();
+            $(".tb_poster_placeholder").remove(); // 回复会员广告
         }, cycle);
     }
     if (location.href.indexOf('tieba.baidu.com/p') > 0) {
@@ -305,4 +305,22 @@ dom.query(document).ready(function ($) {
         $("#sideBannerContainer").remove();
     }
 
+    // 百度网盘
+    if (location.href.indexOf('pan.baidu.com') > 0) {
+        setInterval(function () {
+            $("[node-type=header-union]").remove();
+        }, cycle);
+    }
+    if (location.href.indexOf('pan.baidu.com/share/') > 0) {
+        $(".phone-banner").remove();
+    }
+    if (location.href.indexOf('pan.baidu.com/s/') > 0) {
+        $("#web-right-view").remove();
+        $(".ad-platform-tips").remove();
+        $(".btn-img-tips").remove();
+        setInterval(function () {
+            $(".rights-section").remove();
+            $(".bottom-tip-bar").remove();
+        }, cycle);
+    }
 });
