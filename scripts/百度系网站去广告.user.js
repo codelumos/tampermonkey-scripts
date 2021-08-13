@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    http://tampermonkey.net/
-// @version      4.3
+// @version      4.4
 // @icon         https://www.baidu.com/favicon.ico
 // @description  移除百度系网站中的广告，包括：百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验、百度翻译、百度网盘等
 // @author       HaoNShi
@@ -122,17 +122,13 @@ dom.query(document).ready(function ($) {
         }, cycle);
     }
     if (location.href.indexOf('wenku.baidu.com/search') > 0) {
-        $(".aside").remove(); // 右侧栏
-        $("#pzsearchtop").remove(); // 品牌广告
-        $(".topicBox").remove();
-        $("#fengchaoad").remove();
-        $(".yuedu-recommend-wrap").remove();
-        $(".search-aside-adWrap").remove();
-        $(".search-knowledge").parent().remove();
-        $(".new-vip-card-position").remove();
-        $(".vip-guide-mask").remove();
-        // 移除百度文库0下载券查询页面的遮盖层
-        $(".coverImg").remove();
+        setInterval(function () {
+            $(".fc-product-result-wrap").remove(); // 品牌广告
+            $(".fc-first-result-wrap").remove(); // 搜索条目广告
+        }, cycle);
+        $(".user-vip").remove(); // 顶栏VIP推广
+        $(".base-layout-content-right").remove(); // 右侧栏
+        $(".vip-guide-test").remove(); // 结果条目VIP推广
     }
     if (location.href.indexOf('wenku.baidu.com/view') > 0) {
         setInterval(function () {
