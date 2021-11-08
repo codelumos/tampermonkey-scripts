@@ -45,6 +45,12 @@ dom.query(document).ready(function ($) {
                     $(this).parents(".result").remove();
                 }
             })
+            //推荐信息流广告屏蔽
+            $(".san-card").each(function () {
+                if ($(this).attr("tpl") === 'feed-ad') {
+                    $(this).remove()
+                }
+            })
         }, cycle);
     }
 
