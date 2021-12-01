@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    http://tampermonkey.net/
-// @version      4.4
+// @version      4.5
 // @icon         https://www.baidu.com/favicon.ico
 // @description  移除百度系网站中的广告，包括：百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验、百度翻译、百度网盘等
 // @author       HaoNShi
@@ -16,7 +16,7 @@ dom.query = jQuery.noConflict(true);
 dom.query(document).ready(function ($) {
     'use strict';
 
-    const cycle = 1000; // 广告检测周期
+    const cycle = 500; // 广告检测周期
 
     // 百度搜索
     if (location.href.indexOf('www.baidu.com') > 0) {
@@ -45,7 +45,7 @@ dom.query(document).ready(function ($) {
                     $(this).parents(".result").remove();
                 }
             })
-            //推荐信息流广告屏蔽
+            // 推荐信息流广告屏蔽
             $(".san-card").each(function () {
                 if ($(this).attr("tpl") === 'feed-ad') {
                     $(this).remove()
@@ -131,6 +131,7 @@ dom.query(document).ready(function ($) {
         setInterval(function () {
             $(".fc-product-result-wrap").remove(); // 品牌广告
             $(".fc-first-result-wrap").remove(); // 搜索条目广告
+            $(".bottom-right-dsp-ad-wrap").remove(); // 右下角VIP推广
         }, cycle);
         $(".user-vip").remove(); // 顶栏VIP推广
         $(".base-layout-content-right").remove(); // 右侧栏
@@ -169,6 +170,8 @@ dom.query(document).ready(function ($) {
             $(".hx-right-wrapper").remove(); // 相关资源广告
             $(".extension").remove(); // 右下角广告
             $(".reader-extensin").remove(); // 右下角广告
+            $(".pc-common-sidebar").remove(); // 右下角广告
+            $(".vip-privilege-card-wrap").remove();
             // 底部广告
             $(".hx-recom-wrapper").remove();
             $(".hx-bottom-wrapper").remove();
@@ -177,6 +180,7 @@ dom.query(document).ready(function ($) {
             $("#ggbtm-ads").parent().remove();
             $(".union-ad-bottom").parent().remove();
             $(".bottom-pop-wrap").remove();
+            $(".inner-vip").remove();
         }, cycle);
     }
 
