@@ -1,13 +1,16 @@
 // ==UserScript==
 // @name         M站优化
 // @namespace    http://tampermonkey.net/
-// @version      1.7.1
-// @icon         http://www.bimiacg.net/favicon.ico
+// @version      2.0
+// @icon         https://www.bimiacg5.net/favicon.ico
 // @description  bimi动漫去广告以及其他一系列优化
 // @author       HaoNShi
 // @homepageURL  https://github.com/HaoNShi/tampermonkey-scripts
-// @match        *://www.bimiacg.net/*
+// @match        *://m.dodoge.me/*
 // @match        *://bimiacg.net/*
+// @match        *://www.bimiacg.net/*
+// @match        *://www.bimiacg4.net/*
+// @match        *://www.bimiacg5.net/*
 // @grant        none
 // ==/UserScript==
 
@@ -19,6 +22,7 @@
         $("#HMRichBox").remove(); // 右下角广告
         $("#HMcoupletDivleft").remove(); // 右下角广告
         $("#HMcoupletDivright").remove(); // 右下角广告
+        $("iframe").contents().find("#adv_wrap_hh").remove(); // 播放器暂停广告
     }, 500);
     $(".tuiguang").remove();
 
@@ -49,5 +53,8 @@
             $(this).css("width", "1190px");
         }
     })
+
+    // 删除APP推荐遮罩层
+    $("#bkcl").remove();
 
 })();
