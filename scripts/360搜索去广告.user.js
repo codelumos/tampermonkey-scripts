@@ -3,9 +3,9 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.0.1
 // @icon         https://www.so.com/favicon.ico
-// @description  360搜索、360资讯、360问答、360影视、360图片、360良医、360地图、360百科、360国学、360文库、360音乐、360翻译去广告
-// @author       HaoNShi
-// @homepageURL  https://github.com/HaoNShi/tampermonkey-scripts
+// @description  去除360搜索结果和页面中的绝大多数广告，包括：360搜索、360资讯、360问答、360影视、360图片、360良医、360地图、360百科、360国学、360文库、360音乐、360翻译等
+// @author       CodeLumos
+// @homepageURL  https://github.com/codelumos/tampermonkey-scripts
 // @match        *://*.so.com/*
 // @match        *://video.360kan.com/*
 // @grant        none

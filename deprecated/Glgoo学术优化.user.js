@@ -4,14 +4,14 @@
 // @version      0.2.1
 // @icon         https://xs.xiayige.org/favicon.ico
 // @description  Glgoo学术搜索去广告和其他一系列优化
-// @author       HaoNShi
-// @homepageURL  https://github.com/HaoNShi/tampermonkey-scripts
+// @author       CodeLumos
+// @homepageURL  https://github.com/codelumos/tampermonkey-scripts
 // @match        *://xs.xiayige.org/*
 // @match        *://scholar.123admin.com/*
 // @match        *://xueshu.123admin.com/*
 // @match        *://www.gugexueshu.com/
 // @grant        none
-// @require      https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js
+// @require      https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js
 // ==/UserScript==
 
 (function () {

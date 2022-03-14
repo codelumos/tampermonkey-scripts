@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    http://tampermonkey.net/
-// @version      4.5
+// @version      4.6
 // @icon         https://www.baidu.com/favicon.ico
-// @description  移除百度系网站中的广告，包括：百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验、百度翻译、百度网盘等
-// @author       HaoNShi
-// @homepageURL  https://github.com/HaoNShi/tampermonkey-scripts
+// @description  去除百度搜索结果和页面中的绝大多数广告，包括：百度搜索、百度知道、百度百科、百度文库、百度图片、百度视频、百度贴吧、百度地图、百度经验、百度翻译、百度网盘等
+// @author       CodeLumos
+// @homepageURL  https://github.com/codelumos/tampermonkey-scripts
 // @match        *://*.baidu.com/*
 // @grant        none
 // @require      https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js
@@ -30,6 +30,11 @@ dom.query(document).ready(function ($) {
                 $(this).remove();
             }
         })
+        // 防止导航栏出现白色
+        if ($(".s-tab-item").css("color") === "rgb(255, 255, 255)") {
+            $(".cur-tab").css("color", "black");
+            $(".s-tab-item").css("color", "gray");
+        }
         setInterval(function () {
             // 右侧栏
             $("#content_right").remove();
@@ -172,6 +177,7 @@ dom.query(document).ready(function ($) {
             $(".reader-extensin").remove(); // 右下角广告
             $(".pc-common-sidebar").remove(); // 右下角广告
             $(".vip-privilege-card-wrap").remove();
+            $(".woniu-guide-card").remove(); // 蜗牛广告
             // 底部广告
             $(".hx-recom-wrapper").remove();
             $(".hx-bottom-wrapper").remove();
@@ -269,6 +275,10 @@ dom.query(document).ready(function ($) {
         setInterval(function () {
             $(".fengchao-wrap-feed").remove();
             $(".tb_poster_placeholder").remove(); // 回复会员广告
+            // 右侧广告
+            $("div[id$='_ad']").remove();
+            $("#lu-frs-aside").remove();
+            $("#lu-frs-aside-seat").remove();
         }, cycle);
     }
     if (location.href.indexOf('tieba.baidu.com/p') > 0) {
@@ -278,7 +288,9 @@ dom.query(document).ready(function ($) {
                 $(this).remove();
             }
         });
-        $(".tb_poster_placeholder").remove(); // 回复会员广告
+        setInterval(function () {
+            $(".tb_poster_placeholder").remove(); // 回复会员广告
+        }, cycle);
     }
 
     // 百度地图

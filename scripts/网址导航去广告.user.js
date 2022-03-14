@@ -4,8 +4,8 @@
 // @version      2.0.1
 // @icon         http://www.hao123.com/favicon.ico
 // @description  hao123、2345网址导航、360导航、搜狗网址导航、QQ导航、UC导航、毒霸网址大全去广告
-// @author       HaoNShi
-// @homepageURL  https://github.com/HaoNShi/tampermonkey-scripts
+// @author       CodeLumos
+// @homepageURL  https://github.com/codelumos/tampermonkey-scripts
 // @match        *://www.hao123.com/*
 // @match        *://www.2345.com/*
 // @match        *://hao.360.com/*
@@ -16,7 +16,7 @@
 // @match        *://www.duba.com/*
 // @match        *://www.newduba.cn/*
 // @grant        none
-// @require      https://cdn.bootcss.com/jquery/3.6.0/jquery.min.js
+// @require      https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js
 // ==/UserScript==
 
 jQuery.noConflict();

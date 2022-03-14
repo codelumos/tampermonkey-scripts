@@ -4,8 +4,8 @@
 // @version      1.0.1
 // @icon         https://p5.ssl.qhimg.com/t013ed96d9c4cf74064.png
 // @description  删除快资讯中的广告
-// @author       HaoNShi
-// @homepageURL  https://github.com/HaoNShi/tampermonkey-scripts
+// @author       CodeLumos
+// @homepageURL  https://github.com/codelumos/tampermonkey-scripts
 // @match        *://www.360kuai.com/*
 // @grant        none
 // ==/UserScript==

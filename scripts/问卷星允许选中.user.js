@@ -4,8 +4,8 @@
 // @version      0.1.1
 // @icon         https://www.wjx.cn/favicon.ico
 // @description  问卷星允许选中和右键
-// @author       HaoNShi
-// @homepageURL  https://github.com/HaoNShi/tampermonkey-scripts
+// @author       CodeLumos
+// @homepageURL  https://github.com/codelumos/tampermonkey-scripts
 // @match        https://ks.wjx.top/jq/*
 // @grant        none
 // ==/UserScript==

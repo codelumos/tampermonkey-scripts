@@ -1,11 +1,11 @@
 // ==UserScript==
-// @name         M站优化
+// @name         bimi动漫优化
 // @namespace    http://tampermonkey.net/
 // @version      2.0
 // @icon         https://www.bimiacg5.net/favicon.ico
-// @description  bimi动漫去广告以及其他一系列优化
-// @author       HaoNShi
-// @homepageURL  https://github.com/HaoNShi/tampermonkey-scripts
+// @description  bimi动漫（M站）去广告以及其他一系列优化
+// @author       CodeLumos
+// @homepageURL  https://github.com/codelumos/tampermonkey-scripts
 // @match        *://m.dodoge.me/*
 // @match        *://bimiacg.net/*
 // @match        *://www.bimiacg.net/*
