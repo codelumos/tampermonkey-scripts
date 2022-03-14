@@ -14,7 +14,6 @@
 (function () {
     'use strict';
 
-    // Your code here...
     const cycle = 500; // 广告检测周期
 
     // 360搜索
