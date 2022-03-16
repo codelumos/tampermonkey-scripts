@@ -1,14 +1,15 @@
 // ==UserScript==
 // @name         360搜索去广告
 // @namespace    http://tampermonkey.net/
-// @version      1.0.1
+// @version      1.1
 // @icon         https://www.so.com/favicon.ico
-// @description  去除360搜索结果和页面中的绝大多数广告，包括：360搜索、360资讯、360问答、360影视、360图片、360良医、360地图、360百科、360国学、360文库、360音乐、360翻译等
+// @description  去除360搜索结果和页面中的绝大多数广告，包括：360搜索、360资讯、360问答、360视频、360图片、360良医、360地图、360百科、360国学、360文库、360翻译等
 // @author       CodeLumos
 // @homepageURL  https://github.com/codelumos/tampermonkey-scripts
 // @match        *://*.so.com/*
-// @match        *://video.360kan.com/*
+// @match        *://*.360kan.com/*
 // @grant        none
+// @require      https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js
 // ==/UserScript==
 
 (function () {
@@ -19,20 +20,22 @@
     // 360搜索
     if (location.href.indexOf('www.so.com') > 0) {
         setInterval(function () {
-            $(".lawnfooter-image__panel").remove();// 首页下方横幅广告
+            // 首页广告
+            $(".sad").remove();
+            $(".lawnfooter-image__panel").remove(); // 横幅广告
             $("[data-i='tmall']").remove();
             // 侧边栏
-            $("#so_bd-ad").remove();
-            // $("#soSafe").attr("class", "open");
-            $("#so_ob").remove();
-            $("#lm-rightbottom").remove();
-            $(".res-mediav-right").remove();
+            $("#side").remove();
             // 条目广告
+            $("#m-spread-left").remove();
             $(".res-mediav").remove();
             $(".m-spread-middle").remove();
             $("#news-sdk-sad").remove();
             $(".mh-ad").parent().remove();
-            $("#mohe-360pic_new_ext--strong").remove();
+            $("#e_idea_pp").remove();
+            $("div[id*='--strong']").remove();
+            $("div[id*='--normal']").remove();
+            $("#m-spread-bottom").remove();
         }, cycle);
     }
 
@@ -65,13 +68,17 @@
         }, cycle);
     }
 
-    // 360影视
-    if (location.href.indexOf('video.360kan.com') > 0) {
+    // 360视频
+    if (location.href.indexOf('360kan.com') > 0) {
         setInterval(function () {
+            $(".rt-btm-popup_ad").remove();
+            $(".info-flow__ad").remove();
             $(".p-searchad-wrap").remove(); // 文字广告
+            $("#soRightAd").remove();
             // 条目广告
             $(".adbig").remove();
             $("[data-adclicklog]").remove();
+            $("[data-so-mod='list-ad']").remove();
         }, cycle);
     }
 
@@ -88,6 +95,7 @@
         setInterval(function () {
             $("#so_ob").remove(); // 侧边栏（保留提示）
             $("#news-card").remove(); // 热门资讯推荐
+            $("#m-spread-left").remove();
         }, cycle);
     }
 
@@ -131,6 +139,7 @@
             $("#js-doc-recommand").remove(); // 为您推荐广告
             $(".lm-bottom-container").remove(); // 横幅广告
             $("#J-entry-newsfeed-bottom").remove(); // 资讯
+            $("#interest-wrap").remove(); // 可能感兴趣的内容
         }, cycle);
     }
 
@@ -143,23 +152,13 @@
     }
     if (location.href.indexOf('wenku.so.com/d') > 0) {
         setInterval(function () {
-            $("[id*='QIHOO__WEB__SO__BANNER_SLIDER']").remove(); // 右下角广告
-            $(".page-busi").remove(); // 横幅广告
-            $(".rec-left").remove(); // 为您推荐广告
-            $("#news-card").parent().remove(); // 资讯
-            $(".busi-article").remove(); // 文字广告
-            $("#js-left-interest").parent().parent().remove(); // 您可能感兴趣的内容
+            $(".js-page-busi").remove(); // 文字广告
+            $("#interest").remove(); // 可能感兴趣的内容
+            $(".infoFlow").remove(); // 今日热点
+            $(".fixed-rtbot").remove(); // 右下角广告
             // 侧边栏
-            $("#e_idea_wk_detail_hot").remove(); // 相关文档推荐广告
-            $(".side-mod").remove(); // 今日热点广告
-        }, cycle);
-    }
-
-    // 360音乐
-    if (location.href.indexOf('music.so.com') > 0) {
-        setInterval(function () {
-            $("#right-top-ad").remove(); // 侧边栏
-            $(".newsfeed").remove(); // 相关推荐广告
+            $("[data-so-mod='right_flow']").remove();
+            $("#js-fixed-rt").remove();
         }, cycle);
     }
 
