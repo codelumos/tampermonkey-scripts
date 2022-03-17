@@ -11,75 +11,113 @@
 // @require      https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js
 // ==/UserScript==
 
-let dom = {};
+const dom = {};
+const cycleCallbacks = [];
+
+function execCycleCallbacks() {
+    cycleCallbacks.forEach(f => f());
+    setInterval(() => cycleCallbacks.forEach(f => f()), 500);
+}
+
 dom.query = jQuery.noConflict(true);
 dom.query(document).ready(function ($) {
-    'use strict';
-
-    const cycle = 500; // 广告检测周期
+    "use strict";
 
     // 百度搜索
-    if (location.href.indexOf('www.baidu.com') > 0) {
+    if (location.href.indexOf("www.baidu.com") > 0) {
+        // 左侧栏
+        $("#content_left > div").each(function () {
+            // CSDN 等社区推广
+            if ($(this).text().includes("已为您找到")) {
+                $(this).remove();
+            }
+        });
+
         // 右侧栏
         $("#content_right").remove();
+
         // 品牌广告
         $("#top-ad").remove();
         $(".ec-pl-container").remove();
         $("#content_left > div").each(function () {
-            if ($(this).attr('id') === undefined && $('> style', this).attr('id') !== undefined) {
+            if (
+                $(this).attr("id") === undefined &&
+                $("> style", this).attr("id") !== undefined
+            ) {
                 $(this).remove();
             }
-        })
+        });
+
         // 防止导航栏出现白色
         if ($(".s-tab-item").css("color") === "rgb(255, 255, 255)") {
             $(".cur-tab").css("color", "black");
             $(".s-tab-item").css("color", "gray");
         }
-        setInterval(function () {
-            // 右侧栏
-            $("#content_right").remove();
-            // 搜索结果条目广告
+
+        function anonymous() {
+            // 左侧栏
             $("#content_left > div").each(function () {
-                if ($(this).attr('id') === undefined && $('> div', this).attr('data-placeid') !== undefined) {
+                if ($(this).text().includes("已为您找到")) {
                     $(this).remove();
                 }
-            })
+            });
+
+            // 右侧栏
+            $("#content_right").remove();
+
+            // 搜索结果条目广告
+            $("#content_left > div").each(function () {
+                if (
+                    $(this).attr("id") === undefined &&
+                    $("> div", this).attr("data-placeid") !== undefined
+                ) {
+                    $(this).remove();
+                }
+            });
+
             // 搜索结果延迟条目广告
             $("a").each(function () {
-                if ($(this)[0].innerHTML === '广告') {
+                if ($(this)[0].innerHTML === "广告") {
                     $(this).parents(".result").remove();
                 }
-            })
+            });
+
             // 推荐信息流广告屏蔽
             $(".san-card").each(function () {
-                if ($(this).attr("tpl") === 'feed-ad') {
-                    $(this).remove()
+                if ($(this).attr("tpl") === "feed-ad") {
+                    $(this).remove();
                 }
-            })
-        }, cycle);
+            });
+        }
+
+        cycleCallbacks.push(anonymous.bind(this));
     }
 
     // 百度知道
-    if (location.href.indexOf('zhidao.baidu.com') > 0) {
-        setInterval(function () {
+    if (location.href.indexOf("zhidao.baidu.com") > 0) {
+        cycleCallbacks.push(function () {
             $(".shop-entrance").remove();
             $(".activity-entry").remove();
             $(".task-list-button").remove();
-        }, cycle);
+        });
     }
-    if (location.href.indexOf('zhidao.baidu.com/search') > 0) {
+
+    if (location.href.indexOf("zhidao.baidu.com/search") > 0) {
         // 品牌广告
         $(".leftup").remove();
         $(".wgt-iknow-special-business").remove();
+
         // 右侧栏
         $(".aside.fixheight").remove();
-        setInterval(function () {
+
+        cycleCallbacks.push(function () {
             $(".bannerdown").remove(); // 结果条目广告
             $(".wgt-bottom-ask").remove();
-        }, cycle);
+        });
     }
-    if (location.href.indexOf('zhidao.baidu.com/question') > 0) {
-        setInterval(function () {
+
+    if (location.href.indexOf("zhidao.baidu.com/question") > 0) {
+        cycleCallbacks.push(function () {
             $(".adTopImg").remove();
             $(".exp-topwld-tip").remove();
             $("#wgt-ecom-banner").remove();
@@ -94,18 +132,19 @@ dom.query(document).ready(function ($) {
             $("#answer-bar").removeClass("exp-answerbtn-yh");
             $(".new-icon").remove();
             $(".phone-icon").remove();
-        }, cycle);
+        });
     }
 
     // 百度百科
-    if (location.href.indexOf('baike.baidu.com') > 0) {
-        setInterval(function () {
+    if (location.href.indexOf("baike.baidu.com") > 0) {
+        cycleCallbacks.push(function () {
             $("#navbarAdNew").remove();
             $(".userbar_mall").remove();
-        }, cycle);
+        });
     }
-    if (location.href.indexOf('baike.baidu.com/item') > 0) {
-        setInterval(function () {
+
+    if (location.href.indexOf("baike.baidu.com/item") > 0) {
+        cycleCallbacks.push(function () {
             // 品牌广告
             $(".pinzhuanWrap").remove();
             $(".configModuleBanner").remove();
@@ -115,12 +154,12 @@ dom.query(document).ready(function ($) {
             $(".lemmaWgt-promotion-slide").remove();
             $("#side_box_unionAd").remove();
             $(".after-content").remove(); // 搜索发现
-        }, cycle);
+        });
     }
 
     // 百度文库
-    if (location.href.indexOf('wenku.baidu.com') > 0) {
-        setInterval(function () {
+    if (location.href.indexOf("wenku.baidu.com") > 0) {
+        cycleCallbacks.push(function () {
             $(".tiger-lossUser-dialog-vip").remove();
             $(".banner-ad").remove();
             $(".ad-box").remove();
@@ -130,20 +169,23 @@ dom.query(document).ready(function ($) {
             $(".zsj-topbar").remove();
             $(".lastcell-dialog").remove();
             $(".zsj-toppos").remove();
-        }, cycle);
+        });
     }
-    if (location.href.indexOf('wenku.baidu.com/search') > 0) {
-        setInterval(function () {
+
+    if (location.href.indexOf("wenku.baidu.com/search") > 0) {
+        cycleCallbacks.push(function () {
             $(".fc-product-result-wrap").remove(); // 品牌广告
             $(".fc-first-result-wrap").remove(); // 搜索条目广告
             $(".bottom-right-dsp-ad-wrap").remove(); // 右下角VIP推广
-        }, cycle);
+        });
+
         $(".user-vip").remove(); // 顶栏VIP推广
         $(".base-layout-content-right").remove(); // 右侧栏
         $(".vip-guide-test").remove(); // 结果条目VIP推广
     }
-    if (location.href.indexOf('wenku.baidu.com/view') > 0) {
-        setInterval(function () {
+
+    if (location.href.indexOf("wenku.baidu.com/view") > 0) {
+        cycleCallbacks.push(function () {
             // 全页面广告
             $(".pager-container").remove();
             $(".add-has-money-pay").remove();
@@ -187,29 +229,34 @@ dom.query(document).ready(function ($) {
             $(".union-ad-bottom").parent().remove();
             $(".bottom-pop-wrap").remove();
             $(".inner-vip").remove();
-        }, cycle);
+        });
     }
 
     // 百度图片
-    if (location.href.indexOf('image.baidu.com/search/index') > 0) {
+    if (location.href.indexOf("image.baidu.com/search/index") > 0) {
         // 品牌广告
         $("#pnlBeforeContent").remove();
         $(".adMask").remove();
-        setInterval(function () {
+
+        cycleCallbacks.push(function () {
             $(".newfcImgli").remove();
-        }, cycle);
+        });
     }
-    if (location.href.indexOf('image.baidu.com/search/detail') > 0) {
-        setInterval(function () {
+
+    if (location.href.indexOf("image.baidu.com/search/detail") > 0) {
+        cycleCallbacks.push(function () {
             $(".text-link-ads").remove();
             $(".rsresult-card").remove();
             $("#adCard").remove();
-        }, cycle);
+        });
     }
 
     // 百度视频
-    if (location.href.indexOf('video.baidu.com') > 0 || location.href.indexOf('v.baidu.com') > 0) {
-        setInterval(function () {
+    if (
+        location.href.indexOf("video.baidu.com") > 0 ||
+        location.href.indexOf("v.baidu.com") > 0
+    ) {
+        cycleCallbacks.push(function () {
             $("#pallcommoncolumnad").remove(); // 顶栏广告
             $("#index_right_top").remove(); // 搜索栏右侧广告
             $("#qzfcadid").remove(); // 侧边栏广告
@@ -240,12 +287,17 @@ dom.query(document).ready(function ($) {
             $("div[id*='TabAd']").remove();
             // 底栏广告
             $("#topic-wrap-v2").remove();
-        }, cycle);
+        });
     }
-    if (location.href.indexOf('video.baidu.com/v') > 0 || location.href.indexOf('v.baidu.com/v') > 0) {
+
+    if (
+        location.href.indexOf("video.baidu.com/v") > 0 ||
+        location.href.indexOf("v.baidu.com/v") > 0
+    ) {
         // 品牌广告
         $(".top-ad-cont").remove();
-        setInterval(function () {
+
+        cycleCallbacks.push(function () {
             // 横幅广告
             $("div[id*='searchMoreLong']").remove();
             $("#searchPagefeedBanner").remove();
@@ -255,58 +307,68 @@ dom.query(document).ready(function ($) {
             $("#searchResultAdOne").remove();
             $("#searchHotShortSeven").remove();
             $("#searchHotShortSevenTwo").remove();
-        }, cycle);
+        });
     }
-    if (location.href.indexOf('www.baidu.com/sf/vsearch') > 0) {
+
+    if (location.href.indexOf("www.baidu.com/sf/vsearch") > 0) {
         // 品牌广告
-        $("#s_tab").next().next().each(function () {
-            let id = String($(this).attr("id"));
-            if (id === "undefined") {
-                $(this).remove();
-            }
-        })
+        $("#s_tab")
+            .next()
+            .next()
+            .each(function () {
+                let id = String($(this).attr("id"));
+                if (id === "undefined") {
+                    $(this).remove();
+                }
+            });
     }
 
     // 百度贴吧
-    if (location.href.indexOf('tieba.baidu.com/f/search') > 0) {
+    if (location.href.indexOf("tieba.baidu.com/f/search") > 0) {
         $(".s_aside").remove();
     }
-    if (location.href.indexOf('tieba.baidu.com/f?') > 0) {
-        setInterval(function () {
+
+    if (location.href.indexOf("tieba.baidu.com/f?") > 0) {
+        cycleCallbacks.push(function () {
             $(".fengchao-wrap-feed").remove();
             $(".tb_poster_placeholder").remove(); // 回复会员广告
             // 右侧广告
             $("div[id$='_ad']").remove();
             $("#lu-frs-aside").remove();
             $("#lu-frs-aside-seat").remove();
-        }, cycle);
-    }
-    if (location.href.indexOf('tieba.baidu.com/p') > 0) {
-        $("#j_p_postlist").find("div").each(function () {
-            let isAd = String($(this).attr("ad-dom-img"));
-            if (isAd === "true") {
-                $(this).remove();
-            }
         });
-        setInterval(function () {
+    }
+
+    if (location.href.indexOf("tieba.baidu.com/p") > 0) {
+        $("#j_p_postlist")
+            .find("div")
+            .each(function () {
+                let isAd = String($(this).attr("ad-dom-img"));
+                if (isAd === "true") {
+                    $(this).remove();
+                }
+            });
+
+        cycleCallbacks.push(function () {
             $(".tb_poster_placeholder").remove(); // 回复会员广告
-        }, cycle);
+        });
     }
 
     // 百度地图
-    if (location.href.indexOf('map.baidu.com') > 0) {
+    if (location.href.indexOf("map.baidu.com") > 0) {
         // 品牌广告
-        setInterval(function () {
+        cycleCallbacks.push(function () {
             $("#activity-banner-panel").remove();
             $(".damoce-search-item").remove();
-        }, cycle);
+        });
     }
 
     // 百度经验
-    if (location.href.indexOf('jingyan.baidu.com/search') > 0) {
+    if (location.href.indexOf("jingyan.baidu.com/search") > 0) {
         $(".ec_ad").parent().remove();
     }
-    if (location.href.indexOf('jingyan.baidu.com/article') > 0) {
+
+    if (location.href.indexOf("jingyan.baidu.com/article") > 0) {
         $("#fresh-share-exp-e").remove();
         $(".wgt-income-money").remove();
         $(".aside-pro-container").remove();
@@ -323,28 +385,33 @@ dom.query(document).ready(function ($) {
     }
 
     // 百度翻译
-    if (location.href.indexOf('fanyi.baidu.com') > 0) {
+    if (location.href.indexOf("fanyi.baidu.com") > 0) {
         $("#sideAdContainer").remove();
         $(".spread-wrap").remove();
         $("#sideBannerContainer").remove();
     }
 
     // 百度网盘
-    if (location.href.indexOf('pan.baidu.com') > 0) {
-        setInterval(function () {
+    if (location.href.indexOf("pan.baidu.com") > 0) {
+        cycleCallbacks.push(function () {
             $("[node-type=header-union]").remove();
-        }, cycle);
+        });
     }
-    if (location.href.indexOf('pan.baidu.com/share/') > 0) {
+
+    if (location.href.indexOf("pan.baidu.com/share/") > 0) {
         $(".phone-banner").remove();
     }
-    if (location.href.indexOf('pan.baidu.com/s/') > 0) {
+
+    if (location.href.indexOf("pan.baidu.com/s/") > 0) {
         $("#web-right-view").remove();
         $(".ad-platform-tips").remove();
         $(".btn-img-tips").remove();
-        setInterval(function () {
+
+        cycleCallbacks.push(function () {
             $(".rights-section").remove();
             $(".bottom-tip-bar").remove();
-        }, cycle);
+        });
     }
+
+    execCycleCallbacks();
 });
