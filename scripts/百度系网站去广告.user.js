@@ -21,7 +21,7 @@ dom.query(document).ready(function ($) {
     // 百度搜索
     if (location.href.indexOf('www.baidu.com') > 0) {
         // 右侧栏
-        $("#content_right").remove();
+        // $("#content_right").remove();
         // 品牌广告
         $("#top-ad").remove();
         $(".ec-pl-container").remove();
