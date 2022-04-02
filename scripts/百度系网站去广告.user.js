@@ -282,6 +282,7 @@ dom.query(document).ready(function ($) {
         }, cycle);
     }
     if (location.href.indexOf('tieba.baidu.com/p') > 0) {
+        $("#fc-lu-ad").find("div")[0].remove();
         $("#j_p_postlist").find("div").each(function () {
             let isAd = String($(this).attr("ad-dom-img"));
             if (isAd === "true") {
