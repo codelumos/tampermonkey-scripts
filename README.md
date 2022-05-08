@@ -8,11 +8,11 @@ tampermonkey-scripts中包含多个有关改进网页浏览体验的脚本。
 
 GreasyFork主页：https://greasyfork.org/users/388246
 
-## 项目结构
+## 路径说明
 
-- scripts：维护中的脚本
+- scripts：已发布脚本
 
-- deprecated：停止维护的脚本
+- archived：已归档脚本，不再进行维护
 
 ## 脚本列表
 
@@ -21,13 +21,6 @@ GreasyFork主页：https://greasyfork.org/users/388246
   脚本简介：bimi动漫（M站）去广告以及其他一系列优化
 
   安装链接：https://greasyfork.org/scripts/391325
-
-
-- 网址导航去广告
-
-  脚本简介：去除网址导航页面中的绝大多数广告
-
-  安装链接：https://greasyfork.org/scripts/393949
 
 
 - 百度系网站去广告
