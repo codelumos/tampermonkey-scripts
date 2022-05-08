@@ -37,9 +37,9 @@ GreasyFork主页：https://greasyfork.org/users/388246
   安装链接：https://greasyfork.org/scripts/394099
 
 
-- 问卷星允许选中
+- 问卷星允许选中复制
 
-  脚本简介：问卷星允许选中和右键
+  脚本简介：解除问卷星对选中和右键的限制
 
   安装链接：https://greasyfork.org/scripts/416535
 
