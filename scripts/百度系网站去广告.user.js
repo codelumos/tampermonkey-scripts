@@ -276,12 +276,16 @@ dom.query(document).ready(function ($) {
             $(".fengchao-wrap-feed").remove();
             $(".tb_poster_placeholder").remove(); // 回复会员广告
             // 右侧广告
+            $(".j_click_stats").each(function() {this.parentNode.parentNode.remove()}); //浮窗
+            $(".mediago-ad-wrapper").each(function() {this.parentNode.remove()}); //贴子列表插入广告
             $("div[id$='_ad']").remove();
             $("#lu-frs-aside").remove();
             $("#lu-frs-aside-seat").remove();
         }, cycle);
     }
     if (location.href.indexOf('tieba.baidu.com/p') > 0) {
+        $("#fc-lu-ad").find("div").each(function() {this.remove()}); //侧栏广告
+        $(".mediago-ad-wrapper").each(function() {this.parentNode.remove()}); //贴子列表插入广告
         $("#j_p_postlist").find("div").each(function () {
             let isAd = String($(this).attr("ad-dom-img"));
             if (isAd === "true") {
