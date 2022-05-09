@@ -12,7 +12,7 @@ GreasyFork主页：https://greasyfork.org/users/388246
 
 - scripts：已发布脚本
 
-- archived：已归档脚本，不再进行维护
+- archived：已归档，包含旧的和不支持的脚本，有可能已失效且不再进行维护
 
 ## 脚本列表
 
