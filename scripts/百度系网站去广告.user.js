@@ -1,13 +1,15 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    http://tampermonkey.net/
-// @version      5.1.2
+// @version      5.2
 // @icon         https://www.baidu.com/favicon.ico
 // @description  去除百度搜索结果和页面中的绝大多数广告，包括：百度搜索、百度百科、百度知道、百度文库、百度贴吧等
 // @author       CodeLumos
 // @homepageURL  https://github.com/codelumos/tampermonkey-scripts
 // @match        *://*.baidu.com/*
 // @grant        GM_addStyle
+// @grant        GM_getValue
+// @grant        GM_setValue
 // @require      https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js
 // ==/UserScript==
 
@@ -25,9 +27,40 @@ dom.query(document).ready(function ($) {
         GM_addStyle(no_display_css);
     }
 
+    function add_sidebar_switcher(item) {
+        if (!document.querySelector(item) || document.querySelector("#sidebar_switcher")) {
+            return;
+        }
+        $(item).before("<span id='sidebar_switcher' style='margin-top: 40px; margin-right:40px; float:right'></span>");
+        $("#sidebar_switcher").append("<button id='sidebar-btn'>显示</button>");
+        let show_sidebar = GM_getValue("show_sidebar", false);
+        if (show_sidebar) {
+            $("#sidebar-btn").html("隐藏");
+        } else {
+            $(item).css("display", "none");
+        }
+        document.querySelector("#sidebar-btn").addEventListener("click", function () {
+            return change_sidebar_status(item);
+        }, true);
+    }
+
+    function change_sidebar_status(item) {
+        let show_sidebar = GM_getValue("show_sidebar", false);
+        if (show_sidebar) {
+            GM_setValue("show_sidebar", false);
+            $(item).css("display", "none");
+            $("#sidebar-btn").html("显示");
+        } else {
+            GM_setValue("show_sidebar", true);
+            $(item).css("display", "");
+            $("#sidebar-btn").html("隐藏");
+        }
+    }
+
     switch (hostname.split(".")[0]) {
         // 百度搜索
         case "www":
+            add_sidebar_switcher("#content_right");
             // 百度视频搜索
             if (pathname.startsWith("/sf/vsearch")) {
                 no_display(".ecom_pingzhuan"); // 品牌广告
@@ -125,6 +158,7 @@ dom.query(document).ready(function ($) {
 
         // 百度文库搜索
         case "wenku":
+            add_sidebar_switcher(".base-layout-content-wrap");
             no_display(".adlist-wrap"); // 右侧栏广告
             no_display(".fc-product-result-wrap"); // 品牌广告
             no_display(".fc-first-result-wrap"); // 条目广告
