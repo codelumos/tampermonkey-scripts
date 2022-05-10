@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         360搜索去广告
 // @namespace    http://tampermonkey.net/
-// @version      2.2
+// @version      2.2.1
 // @icon         https://www.so.com/favicon.ico
-// @description  去除360搜索结果和页面中的绝大多数广告，包括：360搜索、360资讯、360问答、360导航等
+// @description  去除360搜索结果和页面中的绝大多数广告，包括：360搜索、360资讯、360问答、360百科、360导航等
 // @author       CodeLumos
 // @homepageURL  https://github.com/codelumos/tampermonkey-scripts
 // @match        *://*.so.com/*
@@ -12,7 +12,7 @@
 // @match        *://*.66health.net/*
 // @match        *://hao.360.com/*
 // @match        *://*.hao.360.cn/*
-// @grant        none
+// @grant        GM_addStyle
 // @require      https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js
 // ==/UserScript==
 
@@ -21,25 +21,12 @@ dom.query = jQuery.noConflict(true);
 dom.query(document).ready(function ($) {
     'use strict';
 
-    const GM_ADD_STYLE_HASH = `GM_addStyle_${parseInt(Math.random() * Date.now())}`; // 随机字符串
-    const detection_cycle = 500; // 检测周期
+    const detection_cycle = 500;
     const cycle_callbacks = [];
     const {hostname, pathname} = location;
 
-    function GM_addStyle(css, dom = document.head, id = GM_ADD_STYLE_HASH) {
-        const style = document.getElementById(id) || (() => {
-            const style = document.createElement('style');
-            style.type = 'text/css';
-            style.id = id;
-            dom.appendChild(style);
-            return style;
-        })();
-        const sheet = style.sheet;
-        css.split('\n\n').forEach(n => sheet.insertRule(n, (sheet.rules || sheet.cssRules || []).length));
-    }
-
     function no_display(item) {
-        const no_display_css = item + ` {display: none;}`;
+        const no_display_css = item + " {display: none;}";
         GM_addStyle(no_display_css);
     }
 
@@ -203,14 +190,14 @@ dom.query(document).ready(function ($) {
     }
 
     // 放心健康
-    if (location.href.indexOf('66health.net') > 0) {
+    if (location.href.indexOf("66health.net") > 0) {
         no_display(".hot-recom"); // 右侧栏广告
         no_display("._sab5d05j0v"); // 右侧栏广告
         $("._qjos0wqy38").remove(); // 搜索推荐广告
     }
 
     // 360导航
-    if (location.href.indexOf('hao.360.com') > 0) {
+    if (location.href.indexOf("hao.360.com") > 0) {
         $("#daily-hotwords").remove(); // 顶栏广告
         $("#activity").remove(); // 左侧栏广告
         $(".plane-priming").remove(); // 右侧栏广告
@@ -229,7 +216,7 @@ dom.query(document).ready(function ($) {
             $(".feed-mv").remove(); // 热点广告
         });
     }
-    if (location.href.indexOf('hao.360.cn') > 0) {
+    if (location.href.indexOf("hao.360.cn") > 0) {
         no_display(".ads-goods"); // 右侧栏广告
         no_display(".feed-ads"); // 右侧栏广告
         no_display(".js-sticky"); // 右侧栏广告
