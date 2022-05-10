@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         360搜索去广告
 // @namespace    http://tampermonkey.net/
-// @version      2.0
+// @version      2.1
 // @icon         https://www.so.com/favicon.ico
 // @description  去除360搜索结果和页面中的绝大多数广告，包括：360搜索、360资讯、360问答、360导航等
 // @author       CodeLumos
@@ -16,10 +16,11 @@
 // @require      https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js
 // ==/UserScript==
 
-(function () {
+const dom = {};
+dom.query = jQuery.noConflict(true);
+dom.query(document).ready(function ($) {
     'use strict';
 
-    // Your code here...
     const GM_ADD_STYLE_HASH = `GM_addStyle_${parseInt(Math.random() * Date.now())}`; // 随机字符串
     const detection_cycle = 500; // 检测周期
     const cycle_callbacks = [];
@@ -47,16 +48,17 @@
             switch (hostname.split(".")[1]) {
                 // 360搜索
                 case "so":
-                    $(".lawnfooter-image__panel").remove(); // 横幅广告
                     no_display("#so_bd-ad"); // 右侧栏广告
                     no_display(".res-mediav-right"); // 右侧栏广告
                     no_display("#lm-rightbottom"); // 猜你想搜
                     no_display(".e-buss"); // 条目广告
                     no_display("div[id*='--normal']"); // 文字广告
                     no_display("[class*='business']"); // mohe条目广告
+                    no_display("#mohe-webgame"); // 360爱玩广告
                     no_display(".mh-sdk-sad"); // 相关消息广告
                     cycle_callbacks.push(function () {
                         $(".sad").remove(); // 热点条目广告
+                        $(".lawnfooter-image__panel").remove(); // 底部遮罩广告
 
                         $("[class*='res-mediav']").remove(); // 条目广告
                     });
@@ -111,6 +113,7 @@
             no_display(".js-right-busi"); // 右侧栏广告
 
             no_display(".js-left-flow-busi"); // 左侧栏广告
+            no_display(".js-answer-adv-part"); // 伪回答广告
             no_display("#attention"); // 猜你关注
             no_display("#detail-guess-wrap"); // 您可能感兴趣的内容
             $(".js-mod-flow").remove(); // 今日热点
@@ -125,9 +128,11 @@
 
         // 360图片
         case "image":
+            no_display(".starlist"); // 横幅广告
             cycle_callbacks.push(function () {
                 $("[data-id*='cm_extended_init']").remove(); // 条目广告
                 $("[data-id*='cm_display_init']").remove(); // 条目广告
+                $("[data-id*='JumpAds']").remove(); // 条目广告
             });
             break;
 
@@ -225,4 +230,4 @@
 
     cycle_callbacks.forEach(f => f());
     setInterval(() => cycle_callbacks.forEach(f => f()), detection_cycle);
-})();
+});
