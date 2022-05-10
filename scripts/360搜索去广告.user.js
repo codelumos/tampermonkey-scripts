@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         360搜索去广告
 // @namespace    http://tampermonkey.net/
-// @version      2.1
+// @version      2.2
 // @icon         https://www.so.com/favicon.ico
 // @description  去除360搜索结果和页面中的绝大多数广告，包括：360搜索、360资讯、360问答、360导航等
 // @author       CodeLumos
@@ -53,8 +53,8 @@ dom.query(document).ready(function ($) {
                     no_display("#lm-rightbottom"); // 猜你想搜
                     no_display(".e-buss"); // 条目广告
                     no_display("div[id*='--normal']"); // 文字广告
-                    no_display("[class*='business']"); // mohe条目广告
-                    no_display("#mohe-webgame"); // 360爱玩广告
+                    no_display("[class*='business']"); // 魔盒条目广告
+                    no_display("#mohe-webgame"); // 360爱玩魔盒
                     no_display(".mh-sdk-sad"); // 相关消息广告
                     cycle_callbacks.push(function () {
                         $(".sad").remove(); // 热点条目广告
@@ -105,7 +105,7 @@ dom.query(document).ready(function ($) {
             break;
 
         // 360问答
-        case "wenda":
+        case "wenda": {
             no_display("#js-mod-fixed-float"); // 右下角广告
             no_display("#e_idea_wenda_leftBox"); // 条目广告
             no_display(".js-busi-item"); // 条目广告
@@ -113,11 +113,19 @@ dom.query(document).ready(function ($) {
             no_display(".js-right-busi"); // 右侧栏广告
 
             no_display(".js-left-flow-busi"); // 左侧栏广告
+            no_display(".js-left-rec-busi"); // 左侧栏广告
             no_display(".js-answer-adv-part"); // 伪回答广告
             no_display("#attention"); // 猜你关注
             no_display("#detail-guess-wrap"); // 您可能感兴趣的内容
             $(".js-mod-flow").remove(); // 今日热点
+            // 将问答主体移动至左侧
+            let wenda_main = $(".js-detail-main");
+            wenda_main.removeClass("fr");
+            wenda_main.addClass("fl");
+            wenda_main.css("padding-left", "40px");
+            wenda_main.css("padding-right", "40px");
             break;
+        }
 
         // 360视频（360kan）
         case "tv":
@@ -129,6 +137,7 @@ dom.query(document).ready(function ($) {
         // 360图片
         case "image":
             no_display(".starlist"); // 横幅广告
+            no_display(".item_cm"); // 条目广告
             cycle_callbacks.push(function () {
                 $("[data-id*='cm_extended_init']").remove(); // 条目广告
                 $("[data-id*='cm_display_init']").remove(); // 条目广告
@@ -203,10 +212,12 @@ dom.query(document).ready(function ($) {
     // 360导航
     if (location.href.indexOf('hao.360.com') > 0) {
         $("#daily-hotwords").remove(); // 顶栏广告
+        $("#activity").remove(); // 左侧栏广告
         $(".plane-priming").remove(); // 右侧栏广告
         no_display("#large2small"); // 右下角广告
         $(".qihoobannerslider").remove(); // 横幅广告
         cycle_callbacks.push(function () {
+            $("[class*='festival']").remove(); // 遮罩广告
             $("._CUBE_A_D_CLK_").remove(); // cube广告
             // 删除cube广告占位
             $(".ad-text").parents(".bottom-line-wrap").remove(); // cube文字广告
