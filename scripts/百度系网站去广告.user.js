@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    http://tampermonkey.net/
-// @version      5.2
+// @version      5.3
 // @icon         https://www.baidu.com/favicon.ico
 // @description  去除百度搜索结果和页面中的绝大多数广告，包括：百度搜索、百度百科、百度知道、百度文库、百度贴吧等
 // @author       CodeLumos
@@ -57,67 +57,70 @@ dom.query(document).ready(function ($) {
         }
     }
 
+    function anti_ad_baidu() {
+        add_sidebar_switcher("#content_right");
+        // 百度视频搜索
+        if (pathname.startsWith("/sf/vsearch")) {
+            no_display(".ecom_pingzhuan"); // 品牌广告
+            no_display("div[id*='_canvas']"); // 品牌广告
+        } else {
+            // 百度搜索
+            no_display("[tpl='feed-ad']"); // 资讯条目广告
+
+            no_display("#top-ad"); // 超级品牌
+            no_display(".ec-pc_comp_banner_cc_float_video-fwc"); // 品牌视频广告
+            no_display("[tpl='sp_hot_sale']"); // 全网热卖
+            no_display("[tpl='short_video']"); // 视频大全
+            no_display("[tpl='sp_rank']"); // 单品榜
+            no_display("[tpl*='game-page']"); // 百度游戏
+            no_display("[tpl*='b2b_prod']"); // 百度爱采购
+            no_display(".pc-btn-des"); // 安全下载提示文字
+            // 右侧栏广告
+            $("#content_right > div").each(function () {
+                if ($(this).attr("id") === undefined) {
+                    $(this).css("display", "none");
+                }
+            });
+            // 条目广告
+            $("#content_left > div").each(function () {
+                if ($(this).attr("id") === undefined && $(this).attr("class") === undefined) {
+                    $(this).css("display", "none");
+                }
+            });
+
+            $("span").each(function () {
+                // 将官网移动为第一条搜索结果
+                if ($(this).hasClass("c-text-blue")) {
+                    $("#content_left").prepend($(this).parents(".result"));
+                }
+                // 去除“安全下载”按钮
+                else if ($(this)[0].innerHTML === "安全下载") {
+                    $(this).css("display", "none");
+                } else if ($(this)[0].innerHTML === " 普通下载 ") {
+                    $(this).html("下载");
+                    $(this).addClass("c-btn-primary");
+                    $(this).css("margin-left", "0px");
+                }
+            });
+
+            // 百度资讯搜索
+            no_display(".ecom_pingzhuan"); // 品牌广告
+            // 延迟出现条目广告
+            $("a").each(function () {
+                if ($(this)[0].innerHTML === "广告") {
+                    $(this).parents(".result").remove();
+                }
+            });
+        }
+    }
+
     switch (hostname.split(".")[0]) {
         // 百度搜索
         case "www":
-            add_sidebar_switcher("#content_right");
-            // 百度视频搜索
-            if (pathname.startsWith("/sf/vsearch")) {
-                no_display(".ecom_pingzhuan"); // 品牌广告
-                no_display("div[id*='_canvas']"); // 品牌广告
-            } else {
-                // 百度搜索
-                no_display("[tpl='feed-ad']"); // 资讯条目广告
-
-                no_display("#top-ad"); // 超级品牌
-                no_display(".ec-pc_comp_banner_cc_float_video-fwc"); // 品牌视频广告
-                no_display("[tpl='sp_hot_sale']"); // 全网热卖
-                no_display("[tpl='short_video']"); // 视频大全
-                no_display("[tpl='sp_rank']"); // 单品榜
-                no_display("[tpl*='game-page']"); // 百度游戏
-                no_display("[tpl*='b2b_prod']"); // 百度爱采购
-                no_display(".pc-btn-des"); // 安全下载提示文字
-                // 右侧栏广告
-                $("#content_right > div").each(function () {
-                    if ($(this).attr("id") === undefined) {
-                        $(this).css("display", "none");
-                    }
-                });
-                // 条目广告
-                $("#content_left > div").each(function () {
-                    if ($(this).attr("id") === undefined && $(this).attr("class") === undefined) {
-                        $(this).css("display", "none");
-                    }
-                });
-                // 将官网移动为第一条搜索结果
-                $("span").each(function () {
-                    if ($(this).hasClass("c-text-blue")) {
-                        $("#content_left").prepend($(this).parents(".result"));
-                    }
-                });
-
-                // 百度资讯搜索
-                no_display(".ecom_pingzhuan"); // 品牌广告
-
-                cycle_callbacks.push(function () {
-                    // 延迟出现条目广告
-                    $("a").each(function () {
-                        if ($(this)[0].innerHTML === "广告") {
-                            $(this).parents(".result").remove();
-                        }
-                    });
-                    // 去除“安全下载”按钮
-                    $("span").each(function () {
-                        if ($(this)[0].innerHTML === "安全下载") {
-                            $(this).css("display", "none");
-                        } else if ($(this)[0].innerHTML === " 普通下载 ") {
-                            $(this).html("下载");
-                            $(this).addClass("c-btn-primary");
-                            $(this).css("margin-left", "0px");
-                        }
-                    });
-                });
-            }
+            anti_ad_baidu();
+            cycle_callbacks.push(function () {
+                anti_ad_baidu();
+            });
             break;
 
         // 百度百科
