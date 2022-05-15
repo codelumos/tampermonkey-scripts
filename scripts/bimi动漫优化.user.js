@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bimi动漫优化
 // @namespace    http://tampermonkey.net/
-// @version      2.2
+// @version      2.3
 // @icon         https://www.bimiacg5.net/favicon.ico
 // @description  bimi动漫（M站）去广告以及一些其他优化
 // @author       CodeLumos
@@ -42,14 +42,13 @@
     // 删除伪搜索历史框
     $(".search-history").remove();
 
-    // 调整播放页的导航栏和关灯按钮的层级
-    $(".wrapper > ul > li > ul").css("z-index", "999");
+    // 调整导航栏二级菜单的层级和宽度，避免被关灯按钮遮挡并变为竖排
+    $(".wrapper > ul > li > ul").css({"z-index": "999", "width": "130"});
 
     // 对齐提示条
     $("div[style]").each(function () {
         if ($(this).css("width") === "1155px") {
-            $(this).css("margin-left", "0px");
-            $(this).css("width", "1190px");
+            $(this).css({"width": "1190px", "margin-left": "", "margin-right": ""});
         }
     })
 
