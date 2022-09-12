@@ -26,6 +26,8 @@ dom.query(document).ready(function ($) {
         const no_display_css = item + " {display: none;}";
         GM_addStyle(no_display_css);
     }
+    
+    no_display("#s-hotsearch-wrapper"); // 百度首页 屏蔽热搜，写这里，屏蔽速度貌似要快一点
 
     function add_sidebar_switcher(item) {
         if (!document.querySelector(item) || document.querySelector("#sidebar_switcher")) {
