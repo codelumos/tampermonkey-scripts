@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         百度系网站去广告
 // @namespace    http://tampermonkey.net/
-// @version      5.3
+// @version      5.4
 // @icon         https://www.baidu.com/favicon.ico
 // @description  去除百度搜索结果和页面中的绝大多数广告，包括：百度搜索、百度百科、百度知道、百度文库、百度贴吧等
 // @author       CodeLumos
 // @homepageURL  https://github.com/codelumos/tampermonkey-scripts
 // @match        *://*.baidu.com/*
+// @run-at       document-start
 // @grant        GM_addStyle
 // @grant        GM_getValue
 // @grant        GM_setValue
@@ -26,8 +27,6 @@ dom.query(document).ready(function ($) {
         const no_display_css = item + " {display: none;}";
         GM_addStyle(no_display_css);
     }
-    
-    no_display("#s-hotsearch-wrapper"); // 百度首页 屏蔽热搜，写这里，屏蔽速度貌似要快一点
 
     function add_sidebar_switcher(item) {
         if (!document.querySelector(item) || document.querySelector("#sidebar_switcher")) {
@@ -97,7 +96,7 @@ dom.query(document).ready(function ($) {
                 }
                 // 去除“安全下载”按钮
                 else if ($(this)[0].innerHTML === "安全下载") {
-                    $(this).css("display", "none");
+                    $(this).parent().css("display", "none");
                 } else if ($(this)[0].innerHTML === " 普通下载 ") {
                     $(this).html("下载");
                     $(this).addClass("c-btn-primary");
@@ -133,7 +132,7 @@ dom.query(document).ready(function ($) {
             no_display(".bottom-recommend-wrapper"); // 猜你喜欢
             break;
 
-        // 百度知道搜索
+        // 百度知道
         case "zhidao":
             no_display("div[id*='_canvas']"); // 右侧栏广告
             no_display(".leftup"); // 品牌广告
@@ -161,13 +160,14 @@ dom.query(document).ready(function ($) {
             });
             break;
 
-        // 百度文库搜索
+        // 百度文库
         case "wenku":
             add_sidebar_switcher(".base-layout-content-wrap");
             no_display(".adlist-wrap"); // 右侧栏广告
             no_display(".fc-product-result-wrap"); // 品牌广告
             no_display(".fc-first-result-wrap"); // 条目广告
             no_display(".vip-guide-test"); // 末尾VIP广告
+            no_display(".fc-result-container"); // 条目广告
 
             no_display(".vip-activity-wrap-new"); // 顶栏VIP广告
             no_display(".vip-privilege-card-wrap"); // 右侧栏VIP广告
@@ -188,7 +188,7 @@ dom.query(document).ready(function ($) {
             });
             break;
 
-        // 百度图片搜索
+        // 百度图片
         case "image":
             no_display("#pnlBeforeContent"); // 品牌广告
             no_display(".newfcImgli"); // 条目广告
@@ -200,6 +200,12 @@ dom.query(document).ready(function ($) {
             no_display("div[id*='aside-ad']"); // 右侧栏广告
             no_display("div[id*='mediago-tb']"); // 条目广告
             no_display(".fengchao-wrap-feed"); // 条目广告
+            no_display(".bus-top-activity-wrap");
+            no_display("div[.thread_item_box]"); // 条目广告
+            if ($("#plat_recom_carousel").length > 0) {
+                no_display("#plat_recom_carousel");
+                GM_addStyle(".head_main {margin-top:2cm;}");
+            }
             cycle_callbacks.push(function () {
                 $(".tb_poster_placeholder").remove(); // 文本框超级会员广告
             });
